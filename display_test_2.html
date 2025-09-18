@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Image Grid</title>
+  <style>
+    body {
+      margin: 2px;
+      padding: 0px;
+      background-color: #f9f9f9;
+    }
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        justify-items: center;
+        column-gap: 19px;
+        row-gap: 0px;
+        align-items: self-start;
+    }
+    .grid img {
+      width: 100%;
+      height: auto;
+      padding: 6px;
+      background-color: white;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+    <div class="grid">
+        <img src="safety_display_Company.svg">
+        <img src="Quality_ALL_DEPARTMENTS.xlsm_Display.svg">
+        <img src="DeliveryOnTime.xlsm_Display.svg">
+        <img src="DirIndir_ALL_DEPARTMENTS.xlsm_Display.svg">
+        <img src="Revenue.xlsm_Display.svg">
+        <img src="safety_display_Front Office.svg"> <!-- Should be 5s company-->
+        <img src="SalesHours_Company.xlsm_Display.svg">
+        <img src="AR_AGING_OVERDUE.xlsm_CompanyDisplay.svg">
+        <img src="LoadHoursRemaining_ALL_DEPARTMENTS.xlsm_Display.svg">
+        <img src="AP_ReceivedNotInvoiced.xlsm_Display.svg">
+    </div>
+</body>
+</html>
