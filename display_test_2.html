@@ -20,9 +20,8 @@
       height: 100%;
       align-content: space-between;
     }
-    .grid img {
-      width: 100%;
-      height: auto;
+    .grid>img {
+      width: auto;
       padding: 6px;
       background-color: white;
       box-shadow: 0 0 5px rgba(0,0,0,0.1);
@@ -31,6 +30,28 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      width: auto;
+      padding: 6px;
+      background-color: white;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+    .splitFrame>img {
+      width: auto;
+      /* padding: 6px; */
+      background-color: white;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+
+    @media (min-width: 4096px) and (min-height: 2160px) {
+      .grid>img {
+      height: 1080px;
+      }
+      .splitFrame {
+      height: 1080px;
+      }
+      .splitFrame>img {
+      height: 540px;
+      }
     }
   </style>
 </head>
