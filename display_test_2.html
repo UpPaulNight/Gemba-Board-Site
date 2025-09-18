@@ -5,17 +5,20 @@
   <title>Image Grid</title>
   <style>
     body {
-      margin: 2px;
-      padding: 0px;
-      background-color: #f9f9f9;
+      overflow: hidden;
+      height: 100%;
+      display: grid;
+      place-items: center;
     }
     .grid {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        justify-items: center;
-        column-gap: 19px;
-        row-gap: 0px;
-        align-items: self-start;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      justify-items: center;
+      column-gap: 19px;
+      row-gap: 0px;
+      align-items: end;
+      height: 100%;
+      align-content: space-between;
     }
     .grid img {
       width: 100%;
@@ -24,20 +27,28 @@
       background-color: white;
       box-shadow: 0 0 5px rgba(0,0,0,0.1);
     }
+    .splitFrame {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
   </style>
 </head>
 <body>
     <div class="grid">
-        <img src="safety_display_Company.svg">
-        <img src="Quality_ALL_DEPARTMENTS.xlsm_Display.svg">
-        <img src="DeliveryOnTime.xlsm_Display.svg">
-        <img src="DirIndir_ALL_DEPARTMENTS.xlsm_Display.svg">
-        <img src="Revenue.xlsm_Display.svg">
-        <img src="safety_display_Front Office.svg"> <!-- Should be 5s company-->
-        <img src="SalesHours_Company.xlsm_Display.svg">
-        <img src="AR_AGING_OVERDUE.xlsm_CompanyDisplay.svg">
-        <img src="LoadHoursRemaining_ALL_DEPARTMENTS.xlsm_Display.svg">
-        <img src="AP_ReceivedNotInvoiced.xlsm_Display.svg">
+        <img src="svg_files/safety_display_Company.svg">
+        <img src="svg_files/Quality_ALL_DEPARTMENTS.xlsm_Display.svg">
+        <img src="svg_files/DeliveryOnTime.xlsm_Display.svg">
+        <img src="svg_files/DirIndir_ALL_DEPARTMENTS.xlsm_Display.svg">
+        <img src="svg_files/Revenue.xlsm_Display.svg">
+        <img src="svg_files/ContinuousImprovement.xlsm_Company.svg">
+        <img src="svg_files/SalesHours_Company.xlsm_Display.svg">
+        <img src="svg_files/AR_AGING_OVERDUE.xlsm_CompanyDisplay.svg">
+        <img src="svg_files/LoadHoursRemaining_ALL_DEPARTMENTS.xlsm_Display.svg">
+        <div class="splitFrame">
+          <img src="svg_files/AP_Unreceived.xlsm_Display.svg">
+          <img src="svg_files/AP_ReceivedNotInvoiced.xlsm_Display.svg">
+        </div>
     </div>
 </body>
 </html>
