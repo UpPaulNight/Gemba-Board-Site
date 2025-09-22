@@ -53,6 +53,13 @@
       }
     }
   </style>
+  <script>
+    let n = 60; // Minutes
+
+    setTimeout(() => {
+      window.location.href = window.location.pathname + "?t=" + new Date().getTime();
+    }, n * 1000 * 60);
+  </script>
 </head>
 <body>
     <div class="grid">
