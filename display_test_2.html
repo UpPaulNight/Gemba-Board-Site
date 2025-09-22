@@ -21,6 +21,7 @@
       align-content: space-between;
     }
     .grid>img {
+      display: none;
       width: auto;
       padding: 6px;
       background-color: white;
@@ -36,6 +37,7 @@
       box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     }
     .splitFrame>img {
+      display: none;
       width: auto;
       /* padding: 6px; */
       background-color: white;
@@ -77,5 +79,37 @@
           <img src="svg_files/AP_ReceivedNotInvoiced.xlsm_Display.svg">
         </div>
     </div>
+    <script>
+      let images = document.querySelectorAll('img');
+      let index = 0;
+      let intervalId = null;
+
+      function showImagesSequentially() {
+          index = 0; // start over
+          intervalId = setInterval(() => {
+              if (index >= images.length) {
+                  clearInterval(intervalId);
+                  return;
+              }
+              images[index].style.display = 'unset';
+              index++;
+          }, 1000);
+      }
+
+      // Initial run
+      showImagesSequentially();
+
+      // Watch for window resize
+      window.addEventListener('resize', () => {
+          // Hide all images immediately
+          images.forEach(img => img.style.display = 'none');
+          
+          // Clear any existing interval
+          if (intervalId) clearInterval(intervalId);
+          
+          // Restart the sequence
+          showImagesSequentially();
+      });
+    </script>
 </body>
 </html>
