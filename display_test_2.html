@@ -49,15 +49,15 @@
     @media (min-width: 4096px) and (min-height: 2160px) {
       .grid>canvas {
         height: 1080px;
-        width: 813px;
+        width: 781px;
       }
       .splitFrame {
         height: 1080px;
-        width: 813px;
+        width: 781px;
       }
       .splitFrame>canvas {
         height: 540px;
-        width: 813px;
+        width: 781px;
       }
     }
   </style>
@@ -104,10 +104,10 @@
         canvases.forEach(canvas => {
           const parent = canvas.parentElement;
           if (parent && parent.classList.contains('grid')) {
-            canvas.width = 813;
+            canvas.width = 781;
             canvas.height = 1080;
           } else if (parent && parent.classList.contains('splitFrame')) {
-            canvas.width = 813;
+            canvas.width = 781;
             canvas.height = 540;
           }
         });
