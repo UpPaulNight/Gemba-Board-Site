@@ -20,8 +20,8 @@
       height: 100%;
       align-content: space-between;
     }
-    .grid>img {
-      display: none;
+    .grid>canvas {
+      /* display: none; */
       width: auto;
       padding: 6px;
       background-color: white;
@@ -36,22 +36,28 @@
       background-color: white;
       box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     }
-    .splitFrame>img {
-      display: none;
+    .splitFrame>canvas {
+      /* display: none; */
       width: auto;
       /* padding: 6px; */
       background-color: white;
     }
+    img {
+      display: none;
+    }
 
     @media (min-width: 4096px) and (min-height: 2160px) {
-      .grid>img {
-      height: 1080px;
+      .grid>canvas {
+        height: 1080px;
+        width: 813px;
       }
       .splitFrame {
-      height: 1080px;
+        height: 1080px;
+        width: 813px;
       }
-      .splitFrame>img {
-      height: 540px;
+      .splitFrame>canvas {
+        height: 540px;
+        width: 813px;
       }
     }
   </style>
@@ -65,50 +71,83 @@
 </head>
 <body>
     <div class="grid">
-        <img src="svg_files/safety_display_Company.svg">
-        <img src="svg_files/Quality_ALL_DEPARTMENTS.xlsm_Display.svg">
-        <img src="svg_files/DeliveryOnTime.xlsm_Display.svg">
-        <img src="svg_files/DirIndir_ALL_DEPARTMENTS.xlsm_Display.svg">
-        <img src="svg_files/Revenue.xlsm_Display.svg">
-        <img src="svg_files/ContinuousImprovement.xlsm_Company.svg">
-        <img src="svg_files/SalesHours_Company.xlsm_Display.svg">
-        <img src="svg_files/AR_AGING_OVERDUE.xlsm_CompanyDisplay.svg">
-        <img src="svg_files/LoadHoursRemaining_ALL_DEPARTMENTS.xlsm_Display.svg">
+        <canvas id="spot01"></canvas>
+        <canvas id="spot02"></canvas>
+        <canvas id="spot03"></canvas>
+        <canvas id="spot04"></canvas>
+        <canvas id="spot05"></canvas>
+        <canvas id="spot06"></canvas>
+        <canvas id="spot07"></canvas>
+        <canvas id="spot08"></canvas>
+        <canvas id="spot09"></canvas>
         <div class="splitFrame">
-          <img src="svg_files/AP_Unreceived.xlsm_Display.svg">
-          <img src="svg_files/AP_ReceivedNotInvoiced.xlsm_Display.svg">
+          <canvas id="spot10"></canvas>
+          <canvas id="spot11"></canvas>
         </div>
     </div>
+    <img id="img01" src="svg_files/safety_display_Company.svg">
+    <img id="img02" src="svg_files/Quality_ALL_DEPARTMENTS.xlsm_Display.svg">
+    <img id="img03" src="svg_files/DeliveryOnTime.xlsm_Display.svg">
+    <img id="img04" src="svg_files/DirIndir_ALL_DEPARTMENTS.xlsm_Display.svg">
+    <img id="img05" src="svg_files/Revenue.xlsm_Display.svg">
+    <img id="img06" src="svg_files/ContinuousImprovement.xlsm_Company.svg">
+    <img id="img07" src="svg_files/SalesHours_Company.xlsm_Display.svg">
+    <img id="img08" src="svg_files/AR_AGING_OVERDUE.xlsm_CompanyDisplay.svg">
+    <img id="img09" src="svg_files/LoadHoursRemaining_ALL_DEPARTMENTS.xlsm_Display.svg">
+    <img id="img10" src="svg_files/AP_Unreceived.xlsm_Display.svg">
+    <img id="img11" src="svg_files/AP_ReceivedNotInvoiced.xlsm_Display.svg">
     <script>
-      let images = document.querySelectorAll('img');
-      let index = 0;
-      let intervalId = null;
+      images = document.querySelectorAll('img')
+      canvases = document.querySelectorAll('canvas')
 
-      function showImagesSequentially() {
-          index = 0; // start over
-          intervalId = setInterval(() => {
-              if (index >= images.length) {
-                  clearInterval(intervalId);
-                  return;
-              }
-              images[index].style.display = 'unset';
-              index++;
-          }, 1000);
+      function setCanvasDimensions() {
+        canvases.forEach(canvas => {
+          const parent = canvas.parentElement;
+          if (parent && parent.classList.contains('grid')) {
+            canvas.width = 813;
+            canvas.height = 1080;
+          } else if (parent && parent.classList.contains('splitFrame')) {
+            canvas.width = 813;
+            canvas.height = 540;
+          }
+        });
       }
 
-      // Initial run
-      showImagesSequentially();
+      setCanvasDimensions();
 
-      // Watch for window resize
-      window.addEventListener('resize', () => {
-          // Hide all images immediately
-          images.forEach(img => img.style.display = 'none');
-          
-          // Clear any existing interval
-          if (intervalId) clearInterval(intervalId);
-          
-          // Restart the sequence
-          showImagesSequentially();
+      function drawImageToCanvas(image, canvas) {
+        const ctx = canvas.getContext("2d");
+        const scale = Math.min(canvas.width / image.width, canvas.height / image.height);
+        const w = image.width * scale;
+        const h = image.height * scale;
+        const x = (canvas.width - w) / 2; // center horizontally
+        const y = (canvas.height - h) / 2; // center vertically
+        ctx.drawImage(image, x, y, w, h);
+      }
+
+      function drawAllImagesToCanvases() {
+        for (let i = 1; i <= 11; i++) {
+          const img = document.getElementById(`img${String(i).padStart(2, '0')}`);
+          const canvas = document.getElementById(`spot${String(i).padStart(2, '0')}`);
+          if (img && canvas) {
+            drawImageToCanvas(img, canvas);
+          }
+        }
+      }
+
+      let loadedCount = 0;
+      const imagesList = Array.from({length: 11}, (_, i) => document.getElementById(`img${String(i+1).padStart(2, '0')}`));
+
+      imagesList.forEach(img => {
+        if (img.complete) {
+          loadedCount++;
+          if (loadedCount === imagesList.length) drawAllImagesToCanvases();
+        } else {
+          img.addEventListener('load', () => {
+            loadedCount++;
+            if (loadedCount === imagesList.length) drawAllImagesToCanvases();
+          });
+        }
       });
     </script>
 </body>
