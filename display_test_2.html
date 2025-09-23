@@ -9,23 +9,22 @@
       height: 100%;
       display: grid;
       place-items: center;
+      margin: 0px;
+      background-color: black;
     }
     .grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       justify-items: center;
       column-gap: 19px;
-      row-gap: 0px;
-      align-items: end;
+      row-gap: 19px;
       height: 100%;
-      align-content: space-between;
+      align-items: start;
     }
     .grid>canvas {
       /* display: none; */
       width: auto;
-      padding: 6px;
       background-color: white;
-      box-shadow: 0 0 5px rgba(0,0,0,0.1);
     }
     .splitFrame {
       display: flex;
