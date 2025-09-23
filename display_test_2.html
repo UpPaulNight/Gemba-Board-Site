@@ -46,6 +46,20 @@
       display: none;
     }
 
+    @media (min-width: 3840px) and (min-height: 2160px) {
+      .grid>canvas {
+        height: 1080px;
+        width: 759px;
+      }
+      .splitFrame {
+        height: 1080px;
+        width: 759px;
+      }
+      .splitFrame>canvas {
+        height: 540px;
+        width: 759px;
+      }
+    }
     @media (min-width: 4096px) and (min-height: 2160px) {
       .grid>canvas {
         height: 1080px;
@@ -100,14 +114,29 @@
       images = document.querySelectorAll('img')
       canvases = document.querySelectorAll('canvas')
 
+      function setWidth(canvas) {
+        switch (window.screen.availWidth) {
+          case 3840:
+            canvas.width = 759;
+            console.log('Small size')
+            break;
+          case 4096:
+            canvas.width = 781;
+            console.log('Big size')
+            break;
+          default:
+            console.log('Unknown resolution');
+        }
+      }
+      
       function setCanvasDimensions() {
         canvases.forEach(canvas => {
           const parent = canvas.parentElement;
           if (parent && parent.classList.contains('grid')) {
-            canvas.width = 781;
+            setWidth(canvas);
             canvas.height = 1080;
           } else if (parent && parent.classList.contains('splitFrame')) {
-            canvas.width = 781;
+            setWidth(canvas);
             canvas.height = 540;
           }
         });
