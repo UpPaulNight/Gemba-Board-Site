@@ -15,15 +15,12 @@
     .grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      justify-items: center;
-      column-gap: 19px;
-      row-gap: 19px;
-      height: 100%;
-      align-items: start;
+      column-gap: 18px;
+    }
+    .grid > * {
+      clip-path: inset(20px 8px 10px 8px round 12px);
     }
     .grid>canvas {
-      /* display: none; */
-      width: auto;
       background-color: white;
     }
     .splitFrame {
@@ -31,32 +28,33 @@
       flex-direction: column;
       align-items: center;
       width: auto;
-      padding: 6px;
-      background-color: white;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+    .splitFrame>canvas:last-child {
+      clip-path: inset(6px 6px 6px 6px round 12px 12px 0 0);
+    }
+    .splitFrame>canvas:first-child {
+      clip-path: inset(6px 6px 6px 6px round 0 0 12px 12px);;
     }
     .splitFrame>canvas {
-      /* display: none; */
       width: auto;
-      /* padding: 6px; */
       background-color: white;
     }
     img {
       display: none;
     }
 
-    @media (min-width: 3840px) and (min-height: 2160px) {
+    /* @media (min-width: 3840px) and (min-height: 2160px) {
       .grid>canvas {
-        height: 1080px;
-        width: 734px;
+        height: 1088px;
+        width: 740px;
       }
       .splitFrame {
-        height: 1080px;
-        width: 734px;
+        height: 1088px;
+        width: 740px;
       }
       .splitFrame>canvas {
         height: 540px;
-        width: 734px;
+        width: 740px;
       }
     }
     @media (min-width: 4096px) and (min-height: 2160px) {
@@ -72,7 +70,7 @@
         height: 540px;
         width: 781px;
       }
-    }
+    } */
   </style>
   <script>
     let n = 60; // Minutes
@@ -116,7 +114,7 @@
       function setWidth(canvas) {
         switch (window.screen.availWidth) {
           case 3840:
-            canvas.width = 734;
+            canvas.width = 752;
             console.log('Small size')
             break;
           case 4096:
@@ -133,7 +131,7 @@
           const parent = canvas.parentElement;
           if (parent && parent.classList.contains('grid')) {
             setWidth(canvas);
-            canvas.height = 1080;
+            canvas.height = 1106;
           } else if (parent && parent.classList.contains('splitFrame')) {
             setWidth(canvas);
             canvas.height = 540;
