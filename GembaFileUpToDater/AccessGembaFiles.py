@@ -3,8 +3,8 @@ from typing import Any, Literal, Optional, TypedDict
 
 from PaulsLoggerManagement import setup_logger
 
-from BAQMethod import BAQMethod
-from epicor_communications import EpicorCommunicator
+from GembaFileUpToDater.BAQMethod import BAQMethod
+from GembaFileUpToDater.epicor_communications import EpicorCommunicator
 
 logger = setup_logger("AccessGembaFiles")
 

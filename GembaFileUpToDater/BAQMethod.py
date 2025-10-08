@@ -4,7 +4,7 @@ from typing import Any, Literal, Optional
 import requests
 from PaulsLoggerManagement import setup_logger
 
-from epicor_communications import EpicorCommunicator
+from GembaFileUpToDater.epicor_communications import EpicorCommunicator
 
 logger = setup_logger("AccessGembaFiles")
 

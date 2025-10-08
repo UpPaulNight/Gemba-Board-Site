@@ -1,0 +1,3 @@
+from GembaFileUpToDater.download_from_server import download_new_files
+
+download_new_files()

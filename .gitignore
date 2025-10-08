@@ -4,6 +4,7 @@ fonts
 __pycache__
 .gitignore
 .vscode
-GembaFileUpToDater/downloaded_ids.json
+downloaded_ids.json
 *.log
 *.ipynb
+.venv

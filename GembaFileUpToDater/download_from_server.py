@@ -3,9 +3,8 @@ import os
 from typing import TypedDict
 from PaulsLoggerManagement import setup_logger
 import pandas as pd
-import requests
-from epicor_communications import File_Operations, Ice_LIB_FileStoreSvc, EpicorCommunicator
-from AccessGembaFiles import AccessGembaFiles
+from GembaFileUpToDater.epicor_communications import File_Operations, Ice_LIB_FileStoreSvc, EpicorCommunicator
+from GembaFileUpToDater.AccessGembaFiles import AccessGembaFiles
 from dotenv import dotenv_values
 
 class FileIDPair(TypedDict):
@@ -15,7 +14,7 @@ class FileIDPair(TypedDict):
 logger = setup_logger('Download-Server')
 ID_FILE = 'downloaded_ids.json'
 
-my_dotenv_values: dict[str, str] = dotenv_values('../.env') # type: ignore[reportAssignmentType, assignment]
+my_dotenv_values: dict[str, str] = dotenv_values('.env') # type: ignore[reportAssignmentType, assignment]
 EpicorCommunicator.API_key = my_dotenv_values['DOWNLOAD_KEY']
 EpicorCommunicator.user_pass = my_dotenv_values['DOWNLOAD_PASS']
 EpicorCommunicator.company_ID = 'PAUL01'
@@ -91,7 +90,7 @@ def download_new_files() -> None:
             continue
         
         logger.info(f'Updating {file["FileName"]}')
-        write_to = f'../svg_files/{file["FileName"]}'
+        write_to = f'svg_files/{file["FileName"]}'
         bytes_str = file_bytes['returnObj']
         File_Operations.decode_file(contents=bytes_str, path=write_to)
 

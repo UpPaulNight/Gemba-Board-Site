@@ -1,0 +1,10 @@
+[Unit]
+Description=Refresh on weekdays with 90 minutes of jitter
+
+[Timer]
+OnCalendar=Mon..Fri 05..20/1:30:00
+RandomizedDelaySec=20m
+Persistent=true
+
+[Install]
+WantedBy=timers.target
