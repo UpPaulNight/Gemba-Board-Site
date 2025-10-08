@@ -139,8 +139,6 @@
         });
       }
 
-      setCanvasDimensions();
-
       function drawImageToCanvas(image, canvas) {
         const ctx = canvas.getContext("2d");
         const scale = Math.min(canvas.width / image.width, canvas.height / image.height);
@@ -161,19 +159,32 @@
         }
       }
 
-      let loadedCount = 0;
-      const imagesList = Array.from({length: 11}, (_, i) => document.getElementById(`img${String(i+1).padStart(2, '0')}`));
-
-      imagesList.forEach(img => {
-        if (img.complete) {
-          loadedCount++;
-          if (loadedCount === imagesList.length) drawAllImagesToCanvases();
-        } else {
-          img.addEventListener('load', () => {
+      
+      function draw_images() {
+        setCanvasDimensions();
+        
+        let loadedCount = 0;
+        const imagesList = Array.from({length: 11}, (_, i) => document.getElementById(`img${String(i+1).padStart(2, '0')}`));
+  
+        imagesList.forEach(img => {
+          if (img.complete) {
             loadedCount++;
             if (loadedCount === imagesList.length) drawAllImagesToCanvases();
-          });
-        }
+          } else {
+            img.addEventListener('load', () => {
+              loadedCount++;
+              if (loadedCount === imagesList.length) drawAllImagesToCanvases();
+            });
+          }
+        });
+      }
+
+      window.addEventListener("load", draw_images);
+      
+      let resizeTimer;
+      window.addEventListener("resize", () => {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(draw_images, 1000); // adjust delay as needed
       });
     </script>
 </body>
