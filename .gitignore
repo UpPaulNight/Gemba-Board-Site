@@ -1,2 +1,9 @@
 svg_files
 fonts
+.env
+__pycache__
+.gitignore
+.vscode
+GembaFileUpToDater/downloaded_ids.json
+*.log
+*.ipynb
