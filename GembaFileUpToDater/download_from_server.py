@@ -79,6 +79,8 @@ def download_new_files() -> None:
     files_not_updated = [f for f in existing_files if f not in old_files]
     logger.info(f'{len(files_not_updated)} will remain unchanged.')
     
+    # Make the svg_files folder if it doesn't exist
+    os.makedirs('svg_files', exist_ok=True)
 
     # Loop over all of those files and download them
     files_updated: list[FileIDPair] = []
