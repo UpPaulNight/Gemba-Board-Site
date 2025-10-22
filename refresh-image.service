@@ -4,5 +4,5 @@ Description=Run python script to refresh image files
 [Service]
 User=pauls
 Type=oneshot
-WorkingDirectory=/home/pauls/Downloads/displaytest
-ExecStart=/home/pauls/Downloads/displaytest/.venv/bin/python3 index.py
+WorkingDirectory=/home/pauls/Gemba-Board-Site
+ExecStart=/home/pauls/Gemba-Board-Site/.venv/bin/python3 index.py
