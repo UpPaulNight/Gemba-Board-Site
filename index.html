@@ -154,7 +154,7 @@
       }
 
       function drawAllImagesToCanvases() {
-        for (let i = 1; i <= 11; i++) {
+        for (let i = 1; i <= 12; i++) {
           const img = document.getElementById(`img${String(i).padStart(2, '0')}`);
           const canvas = document.getElementById(`spot${String(i).padStart(2, '0')}`);
           if (img && canvas) {
@@ -168,7 +168,7 @@
         setCanvasDimensions();
         
         let loadedCount = 0;
-        const imagesList = Array.from({length: 11}, (_, i) => document.getElementById(`img${String(i+1).padStart(2, '0')}`));
+        const imagesList = Array.from({length: 12}, (_, i) => document.getElementById(`img${String(i+1).padStart(2, '0')}`));
   
         imagesList.forEach(img => {
           if (img.complete) {
