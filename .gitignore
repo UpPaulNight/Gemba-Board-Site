@@ -1,5 +1,5 @@
 svg_files
-fonts
+.fonts_ignore
 .env
 __pycache__
 .gitignore
