@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Image Grid</title>
+  <style>
+    body {
+      overflow: hidden;
+      width: 100%;
+      display: grid;
+      place-items: center;
+      margin: 0px;
+      background-color: black;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 18px;
+    }
+    .grid > * {
+      clip-path: inset(20px 8px 10px 8px round 12px);
+    }
+    .grid>canvas {
+      background-color: white;
+    }
+    .splitFrame {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: auto;
+      justify-content: space-between;
+    }
+    .splitFrame>canvas:last-child {
+      clip-path: inset(6px 6px 6px 6px round 12px 12px 0 0);
+    }
+    .splitFrame>canvas:first-child {
+      clip-path: inset(6px 6px 6px 6px round 0 0 12px 12px);;
+    }
+    .splitFrame>canvas {
+      width: auto;
+      background-color: white;
+    }
+    img {
+      display: none;
+    }
+
+    /* @media (min-width: 3840px) and (min-height: 2160px) {
+      .grid>canvas {
+        height: 1088px;
+        width: 740px;
+      }
+      .splitFrame {
+        height: 1088px;
+        width: 740px;
+      }
+      .splitFrame>canvas {
+        height: 540px;
+        width: 740px;
+      }
+    }
+    @media (min-width: 4096px) and (min-height: 2160px) {
+      .grid>canvas {
+        height: 1080px;
+        width: 781px;
+      }
+      .splitFrame {
+        height: 1080px;
+        width: 781px;
+      }
+      .splitFrame>canvas {
+        height: 540px;
+        width: 781px;
+      }
+    } */
+  </style>
+  <script>
+    let n = 60; // Minutes
+
+    setTimeout(() => {
+      window.location.href = window.location.pathname + "?t=" + new Date().getTime();
+    }, n * 1000 * 60);
+  </script>
+</head>
+<body>
+    <div class="grid">
+      <div class="splitFrame">
+        <canvas id="spot01"></canvas>
+        <canvas id="spot02"></canvas>
+      </div>
+      <canvas id="spot03"></canvas>
+      <canvas id="spot04"></canvas>
+      <div class="splitFrame">
+        <canvas id="spot05"></canvas>
+        <canvas id="spot06"></canvas>
+      </div>
+      <canvas id="spot07"></canvas>
+      <canvas id="spot08"></canvas>
+      <!-- <canvas id="spot08"></canvas>
+      <canvas id="spot09"></canvas> -->
+      <!-- <canvas id="spot10"></canvas>
+      <canvas id="spot11"></canvas> -->
+    </div>
+    <img id="img01" src="svg_files/ContinuousImprovement.xlsm_FrontOffice.svg">
+    <img id="img02" src="">
+    <img id="img03" src="svg_files/safety_display_Front Office.svg">
+    <img id="img04" src="svg_files/AR_AGING_OVERDUE.xlsm_FrontOfficeDisplay.svg">
+    <img id="img05" src="svg_files/AP_ReceivedNotInvoiced.xlsm_DisplayFrontOffice.svg">
+    <img id="img06" src="">
+    <img id="img07" src="">
+    <img id="img08" src="">
+    <img id="img09" src="">
+    <img id="img10" src="">
+    <img id="img11" src="">
+    <img id="img12" src="">
+    <script>
+      images = document.querySelectorAll('img')
+      canvases = document.querySelectorAll('canvas')
+
+      function setWidth(canvas) {
+        switch (window.screen.availWidth) {
+          case 3840:
+            canvas.width = 752;
+            console.log('Small size')
+            break;
+          case 4096:
+            canvas.width = 781;
+            console.log('Big size')
+            break;
+          case 2160:
+            canvas.width= 1040;
+            console.log('Big vertical') 
+            break
+          default:
+            console.log('Unknown resolution');
+        }
+      }
+
+      function setHeight(canvas, parent) {
+        if (parent && parent.classList.contains('grid')) {
+          switch (window.screen.availHeight) {
+            case 3840:
+              canvas.height = 1278;
+              break
+            case 3840:
+            case 4096:
+              canvas.height = 1106
+              break
+          }
+        } else if (parent && parent.classList.contains('splitFrame')){
+          switch (window.screen.availHeight) {
+            case 3840:
+              canvas.height = 630;
+              break
+            case 2160:
+              canvas.height = 540;
+              break
+          }
+        }
+      }
+      
+      function setCanvasDimensions() {
+        canvases.forEach(canvas => {
+          const parent = canvas.parentElement;
+          setWidth(canvas);
+          setHeight(canvas, parent)
+          // if (parent && parent.classList.contains('grid')) {
+          //   // canvas.height = (window.screen.availWidth < window.screen.availHeight) ? 1106 : 540;
+          // } else if (parent && parent.classList.contains('splitFrame')) {
+          //   setWidth(canvas);
+          //   // canvas.height = (window.screen.availWidth < window.screen.availHeight) ? 540 : 1106;
+          //   setHeight(canvas, parent)
+          // }
+        });
+      }
+
+      function drawImageToCanvas(image, canvas) {
+        const ctx = canvas.getContext("2d");
+        const scale = Math.min(canvas.width / image.width, canvas.height / image.height);
+        const w = image.width * scale;
+        const h = image.height * scale;
+        const x = (canvas.width - w) / 2; // center horizontally
+        const y = (canvas.height - h) / 2; // center vertically
+        ctx.drawImage(image, x, y, w, h);
+      }
+
+      function drawAllImagesToCanvases() {
+        for (let i = 1; i <= 12; i++) {
+          const img = document.getElementById(`img${String(i).padStart(2, '0')}`);
+          const canvas = document.getElementById(`spot${String(i).padStart(2, '0')}`);
+          if (img && canvas) {
+            drawImageToCanvas(img, canvas);
+          }
+        }
+      }
+
+      
+      function draw_images() {
+        setCanvasDimensions();
+        
+        let loadedCount = 0;
+        const imagesList = Array.from({length: 12}, (_, i) => document.getElementById(`img${String(i+1).padStart(2, '0')}`));
+  
+        imagesList.forEach(img => {
+          if (img.complete) {
+            loadedCount++;
+            if (loadedCount === imagesList.length) drawAllImagesToCanvases();
+          } else {
+            img.addEventListener('load', () => {
+              loadedCount++;
+              if (loadedCount === imagesList.length) drawAllImagesToCanvases();
+            });
+          }
+        });
+      }
+
+      window.addEventListener("load", draw_images);
+      
+      let resizeTimer;
+      window.addEventListener("resize", () => {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(draw_images, 1000); // adjust delay as needed
+      });
+    </script>
+</body>
+</html>
