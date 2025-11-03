@@ -41,24 +41,21 @@
       display: none;
     }
     #GembaName {
-      /* background-color: white; */
       font-size: 112pt;
       font-family: "PT Serif";
-      background-color: white;
       width: 100%;
       text-align: center;
     }
     .splitFrameCanvasContainer {
       width: auto;
-      padding: 6px;
-      background-color: black;
       width: 1040px;
       height: 618px;
       flex-grow: 1;
       border-radius: 33px;
-    }
-    .splitFrameCanvasContainer>canvas {
-      border-radius: 33px;
+      display: flex;
+      justify-content: center;
+      background-color: white;
+      border: 6px solid black;
     }
   </style>
   <script>
@@ -70,7 +67,7 @@
   </script>
 </head>
 <body>
-    <div id="GembaName">FABRICATION GEMBA BOARD</div>
+    <div id="GembaName">MACHINING GEMBA BOARD</div>
     <div class="grid">
       <canvas id="spot01"></canvas>
       <canvas id="spot02"></canvas>
@@ -122,10 +119,10 @@
           switch (window.screen.availWidth) {
             case 3840:
             case 4096:
-              canvas.width = 481;
+              canvas.width = 877;
               break;
             case 2160:
-              canvas.width= 1040;
+              canvas.width= 877;
               break;
             default:
               console.log('Unknown resolution');
