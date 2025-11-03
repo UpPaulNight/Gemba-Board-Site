@@ -113,31 +113,62 @@
       images = document.querySelectorAll('img')
       canvases = document.querySelectorAll('canvas')
 
-      function setWidth(canvas) {
+      function setWidth(canvas, parentClassContains) {
         switch (window.screen.availWidth) {
           case 3840:
             canvas.width = 752;
-            console.log('Small size')
             break;
           case 4096:
             canvas.width = 781;
-            console.log('Big size')
             break;
+          case 2160:
+            canvas.width= 1040;
+            break
           default:
-            console.log('Unknown resolution');
+            console.log(`Unknown resolution ${window.screen.availWidth}`);
+        }
+      }
+
+      function setHeight(canvas, parentClassContains) {
+
+        if (parentClassContains == 'grid') {
+          switch (window.screen.height) {
+            case 2160:
+              canvas.height = 1080;
+              break;
+            case 3840:
+            case 4096:
+              canvas.height = 1106;
+              break;
+            default:
+              console.log(`Unknown resolution ${window.screen.height}`);
+          }
+        } else if (parentClassContains == 'splitFrame') {
+          switch (window.screen.height) {
+            case 4096:
+            case 3840:
+              canvas.height = 630;
+              break
+            case 2160:
+              canvas.height = 540;
+              break
+            default:
+              console.log(`Unknown resolution ${window.screen.height}`);
+          }
         }
       }
       
       function setCanvasDimensions() {
+
+        console.log('Resizing canvases...');
+        console.log('Screen Width: ' + window.screen.availWidth);
+        console.log('Screen Height: ' + window.screen.availHeight);
+        
         canvases.forEach(canvas => {
           const parent = canvas.parentElement;
-          if (parent && parent.classList.contains('grid')) {
-            setWidth(canvas);
-            canvas.height = 1106;
-          } else if (parent && parent.classList.contains('splitFrame')) {
-            setWidth(canvas);
-            canvas.height = 540;
-          }
+          const parentClassContains = parent.classList.contains('grid') ? 'grid' : parent.classList.contains('splitFrame') ? 'splitFrame' : '';
+          setWidth(canvas, parentClassContains);
+          setHeight(canvas, parentClassContains);
         });
       }
 
