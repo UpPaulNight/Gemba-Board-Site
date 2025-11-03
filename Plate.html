@@ -57,6 +57,9 @@
       background-color: white;
       border: 6px solid black;
     }
+    .hidden {
+      opacity: 0;
+    }
   </style>
   <script>
     let n = 60; // Minutes
@@ -72,12 +75,12 @@
       <canvas id="spot01"></canvas>
       <div class="splitFrame">
         <div class="splitFrameCanvasContainer"><canvas id="spot02"></canvas></div>
-        <div class="splitFrameCanvasContainer"><canvas id="spot03"></canvas></div>
+        <div class="splitFrameCanvasContainer hidden"><canvas id="spot03"></canvas></div>
       </div>
       <canvas id="spot04"></canvas>
       <canvas id="spot05"></canvas>
-      <canvas id="spot07"></canvas>
-      <canvas id="spot08"></canvas>
+      <canvas class="hidden" id="spot07"></canvas>
+      <canvas class="hidden" id="spot08"></canvas>
       <!-- <canvas id="spot08"></canvas>
       <canvas id="spot09"></canvas> -->
       <!-- <canvas id="spot10"></canvas>
@@ -88,8 +91,8 @@
     <img id="img03" src="">
     <img id="img04" src="svg_files/safety_display_Plate Processing.svg">
     <img id="img05" src="svg_files/DirIndir_Plate.xlsm_Display.svg">
-    <img id="img06" src="">
-    <img id="img07" src="">
+    <img id="img06" class="hidden" src="">
+    <img id="img07" class="hidden" src="">
     <img id="img08" src="">
     <img id="img09" src="">
     <img id="img10" src="">

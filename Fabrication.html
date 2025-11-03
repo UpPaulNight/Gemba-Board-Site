@@ -57,6 +57,9 @@
       background-color: white;
       border: 6px solid black;
     }
+    .hidden {
+      opacity: 0;
+    }
   </style>
   <script>
     let n = 60; // Minutes
@@ -73,11 +76,11 @@
       <canvas id="spot02"></canvas>
       <div class="splitFrame">
         <div class="splitFrameCanvasContainer"><canvas id="spot03"></canvas></div>
-        <div class="splitFrameCanvasContainer"><canvas id="spot04"></canvas></div>
+        <div class="splitFrameCanvasContainer hidden"><canvas id="spot04"></canvas></div>
       </div>
       <canvas id="spot05"></canvas>
-      <canvas id="spot06"></canvas>
-      <canvas id="spot07"></canvas>
+      <canvas class="hidden" id="spot06"></canvas>
+      <canvas class="hidden" id="spot07"></canvas>
       <!-- <canvas id="spot08"></canvas>
       <canvas id="spot09"></canvas> -->
       <!-- <canvas id="spot10"></canvas>
