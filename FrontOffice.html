@@ -10,18 +10,19 @@
       display: grid;
       place-items: center;
       margin: 0px;
-      background-color: black;
+      background-color: white;
     }
     .grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       column-gap: 18px;
-    }
-    .grid > * {
-      clip-path: inset(20px 8px 10px 8px round 12px);
+      row-gap: 18px;
+      height: 3852px;
     }
     .grid>canvas {
-      background-color: white;
+      background-color: black;
+      padding: 6px;
+      border-radius: 33px;
     }
     .splitFrame {
       display: flex;
@@ -30,48 +31,32 @@
       width: auto;
       justify-content: space-between;
     }
-    .splitFrame>canvas:last-child {
-      clip-path: inset(6px 6px 6px 6px round 12px 12px 0 0);
+    .splitFrame>.splitFrameCanvasContainer:last-child {
+      margin-top: 6px;
     }
-    .splitFrame>canvas:first-child {
-      clip-path: inset(6px 6px 6px 6px round 0 0 12px 12px);;
-    }
-    .splitFrame>canvas {
-      width: auto;
-      background-color: white;
+    .splitFrame>.splitFrameCanvasContainer:first-child {
+      margin-bottom: 6px;
     }
     img {
       display: none;
     }
-
-    /* @media (min-width: 3840px) and (min-height: 2160px) {
-      .grid>canvas {
-        height: 1088px;
-        width: 740px;
-      }
-      .splitFrame {
-        height: 1088px;
-        width: 740px;
-      }
-      .splitFrame>canvas {
-        height: 540px;
-        width: 740px;
-      }
+    #GembaName {
+      font-size: 112pt;
+      font-family: "PT Serif";
+      width: 100%;
+      text-align: center;
     }
-    @media (min-width: 4096px) and (min-height: 2160px) {
-      .grid>canvas {
-        height: 1080px;
-        width: 781px;
-      }
-      .splitFrame {
-        height: 1080px;
-        width: 781px;
-      }
-      .splitFrame>canvas {
-        height: 540px;
-        width: 781px;
-      }
-    } */
+    .splitFrameCanvasContainer {
+      width: auto;
+      width: 1040px;
+      height: 618px;
+      flex-grow: 1;
+      border-radius: 33px;
+      display: flex;
+      justify-content: center;
+      background-color: white;
+      border: 6px solid black;
+    }
   </style>
   <script>
     let n = 60; // Minutes
@@ -82,16 +67,17 @@
   </script>
 </head>
 <body>
+    <div id="GembaName">FRONT OFFICE GEMBA</div>
     <div class="grid">
       <div class="splitFrame">
-        <canvas id="spot01"></canvas>
-        <canvas id="spot02"></canvas>
+        <div class="splitFrameCanvasContainer"><canvas id="spot01"></canvas></div>
+        <div class="splitFrameCanvasContainer"><canvas id="spot02"></canvas></div>
       </div>
       <canvas id="spot03"></canvas>
       <canvas id="spot04"></canvas>
       <div class="splitFrame">
-        <canvas id="spot05"></canvas>
-        <canvas id="spot06"></canvas>
+        <div class="splitFrameCanvasContainer"><canvas id="spot05"></canvas></div>
+        <div class="splitFrameCanvasContainer"><canvas id="spot06"></canvas></div>
       </div>
       <canvas id="spot07"></canvas>
       <canvas id="spot08"></canvas>
@@ -113,22 +99,37 @@
     <img id="img11" src="">
     <img id="img12" src="">
     <script>
-      images = document.querySelectorAll('img')
-      canvases = document.querySelectorAll('canvas')
+      const images = document.querySelectorAll('img')
+      const canvases = document.querySelectorAll('canvas')
 
       function setWidth(canvas, parentClassContains) {
-        switch (window.screen.availWidth) {
-          case 3840:
-            canvas.width = 752;
-            break;
-          case 4096:
-            canvas.width = 781;
-            break;
-          case 2160:
-            canvas.width= 1040;
-            break
-          default:
-            console.log('Unknown resolution');
+        if (parentClassContains == 'grid') {
+          switch (window.screen.availWidth) {
+            case 2160:
+              canvas.width = 1040;
+              break;
+            case 3840:
+              canvas.width = 752;
+              break;
+            case 4096:
+              canvas.width = 781;
+              break;
+            default:
+              console.log('Unknown resolution');
+          }
+
+        } else if (parentClassContains == 'splitFrame') {
+          switch (window.screen.availWidth) {
+            case 3840:
+            case 4096:
+              canvas.width = 877;
+              break;
+            case 2160:
+              canvas.width= 877;
+              break;
+            default:
+              console.log('Unknown resolution');
+          }
         }
       }
 
@@ -138,23 +139,25 @@
           switch (window.screen.height) {
             case 2160:
               canvas.height = 1080;
-              break
+              break;
             case 3840:
             case 4096:
               canvas.height = 1260;
-              break
+              break;
             default:
               console.log('Unknown resolution');
           }
+
         } else if (parentClassContains == 'splitFrame') {
           switch (window.screen.height) {
-            case 4096:
-            case 3840:
-              canvas.height = 630;
-              break
             case 2160:
               canvas.height = 540;
-              break
+              // canvas.height = 508;
+              break;
+            case 4096:
+            case 3840:
+              canvas.height = 618;
+              break;
             default:
               console.log('Unknown resolution');
           }
@@ -169,7 +172,7 @@
         
         canvases.forEach(canvas => {
           const parent = canvas.parentElement;
-          const parentClassContains = parent.classList.contains('grid') ? 'grid' : parent.classList.contains('splitFrame') ? 'splitFrame' : '';
+          const parentClassContains = parent.classList.contains('grid') ? 'grid' : parent.classList.contains('splitFrameCanvasContainer') ? 'splitFrame' : '';
           setWidth(canvas, parentClassContains);
           setHeight(canvas, parentClassContains);
         });
@@ -182,6 +185,9 @@
         const h = image.height * scale;
         const x = (canvas.width - w) / 2; // center horizontally
         const y = (canvas.height - h) / 2; // center vertically
+        ctx.fillStyle = "white";
+        ctx.rect(0, 0, canvas.width, canvas.height);
+        ctx.fill();
         ctx.drawImage(image, x, y, w, h);
       }
 
