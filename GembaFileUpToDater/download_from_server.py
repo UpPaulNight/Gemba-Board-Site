@@ -11,7 +11,9 @@ class FileIDPair(TypedDict):
     SysID: str
     FileName: str
 
-logger = setup_logger('Download-Server')
+from GembaFileUpToDater.parse_args import should_show_debug
+import logging
+logger = setup_logger("AccessGembaFiles", level=(logging.DEBUG if should_show_debug() else logging.INFO))
 ID_FILE = 'downloaded_ids.json'
 
 my_dotenv_values: dict[str, str] = dotenv_values('.env') # type: ignore[reportAssignmentType, assignment]

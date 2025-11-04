@@ -6,7 +6,9 @@ from PaulsLoggerManagement import setup_logger
 from GembaFileUpToDater.BAQMethod import BAQMethod
 from GembaFileUpToDater.epicor_communications import EpicorCommunicator
 
-logger = setup_logger("AccessGembaFiles")
+from GembaFileUpToDater.parse_args import should_show_debug
+import logging
+logger = setup_logger("AccessGembaFiles", level=(logging.DEBUG if should_show_debug() else logging.INFO))
 
 class GembaFileReference(TypedDict):
     Company: str

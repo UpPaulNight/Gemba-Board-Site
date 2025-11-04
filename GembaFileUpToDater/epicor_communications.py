@@ -10,7 +10,9 @@ from PaulsLoggerManagement import setup_logger
 from PIL.ImageFile import ImageFile
 from requests.exceptions import HTTPError
 
-logger = setup_logger("EpicorCommunications")
+from GembaFileUpToDater.parse_args import should_show_debug
+import logging
+logger = setup_logger("AccessGembaFiles", level=(logging.DEBUG if should_show_debug() else logging.INFO))
 
 class EpicorImage(TypedDict):
     Company: str
