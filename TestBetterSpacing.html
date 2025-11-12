@@ -5,81 +5,74 @@
   <title>Custom Manufacturing Board</title>
   <style>
     body {
-      overflow: hidden;
-      width: 100%;
-      display: grid;
-      place-items: center;
-      /* margin: 0px; */
-      background-color: white;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      height: 3852px;
-    }
-    .grid>canvas {
-      border: 6px solid black;
-      border-radius: 33px;
-    }
-    .splitFrame {
+      /* overflow: hidden; */
       display: flex;
       flex-direction: column;
-      align-items: center;
-      width: auto;
-      justify-content: space-between;
+      place-items: center;
+      margin: 0px;
+      background-color: white;
+      /* height: 2160px; */
+      /* width: 4096px; */
+      gap: 13px;
+      margin: 13px;
     }
-    .splitFrame>.splitFrameCanvasContainer:last-child {
-      margin-top: 6px;
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: center;
+      align-content: space-around;
+      gap: 13px;
+      width: 4096px;
+      flex: 1;
+      /* height: 1080px; */
+      height: 100%;
+      width: 100%;
     }
-    .splitFrame>.splitFrameCanvasContainer:first-child {
-      margin-bottom: 6px;
+    .grid>* {
+      border: 6px solid black;
+      border-radius: 11px;
+      flex: 1;
+      /* height: 100%; */
+      width: 100%;
+      /* height: 1048.5px; */
+    }
+    .grid>canvas {
+      height: 1048.5px;
+    }
+    .grid>.splitFrame {
+      height: 1060.5px;
     }
     img {
       display: none;
     }
-    #GembaName {
-      font-size: 78pt;
-      font-family: "PT Serif";
-      width: 100%;
-      text-align: center;
+    .splitFrame {
+      border: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 13px;
     }
     .splitFrameCanvasContainer {
-      width: auto;
-      width: 1040px;
-      height: 618px;
-      flex-grow: 1;
-      border-radius: 33px;
+      border: 6px solid black;
+      border-radius: 11px;
+      width: 792.8px;
       display: flex;
       justify-content: center;
-      background-color: white;
-      border: 6px solid black;
+      flex: 1;
+    }
+    .splitFrameCanvasContainer>canvas {
+      height: 505.75px;
     }
     .hidden {
       opacity: 0;
     }
-    @media (max-height: 2160px) { /* Horizontal */
-      .splitFrameCanvasContainer {
-        height: 523.5px;
-        width: 752px;
-      }
-      .grid {
-        height: 2160px;
-        row-gap: 9px;
-        column-gap: 9px;
-      }
-      .splitFrame {
-        width: 763.2px;
-      }
-      .splitFrameCanvasContainer>canvas {
-        padding: 1px;
-      }
+    .twoFrame {
+      flex-grow: 2;
+      min-width: 1610.6px;
     }
-    @media (max-width: 2160px) { /* Vertical */
-      .grid {
-        grid-template-columns: repeat(2, 1fr);
-        row-gap: 18px;
-        column-gap: 18px;
-      }
+    .ec-event-body {
+      border: 1px solid white;
     }
   </style>
   <script>
@@ -89,35 +82,51 @@
       window.location.href = window.location.pathname + "?t=" + new Date().getTime();
     }, n * 1000 * 60);
   </script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@event-calendar/build@4.7.1/dist/event-calendar.min.css">
+  <style>
+      .ec-time-grid .ec-time, .ec-time-grid .ec-line {
+          height: 40px;
+      }
+      .ec {
+          height: 1040px;
+      }
+  </style>
 </head>
 <body>
-    <div class="grid">
-      <canvas id="spot01"></canvas>
-      <canvas id="spot02"></canvas>
-      <div class="splitFrame">
-        <div class="splitFrameCanvasContainer"><canvas id="spot03"></canvas></div>
-        <div class="splitFrameCanvasContainer"><canvas id="spot04"></canvas></div>
-      </div>
-      <canvas id="spot05"></canvas>
-      <canvas class="hidden" id="spot06"></canvas>
-      <canvas class="" id="spot07"></canvas>
-      <canvas class="hidden" id="spot08"></canvas>
-      <!-- <canvas id="spot09"></canvas> -->
-      <!-- <canvas id="spot10"></canvas>
-      <canvas id="spot11"></canvas> -->
+  <div class="grid_row_1 grid">
+    <canvas id="spot01"></canvas>
+    <canvas id="spot02"></canvas>
+    <div class="splitFrame">
+      <div class="splitFrameCanvasContainer"><canvas id="spot03"></canvas></div>
+      <div class="splitFrameCanvasContainer hidden"><canvas id="spot04"></canvas></div>
     </div>
-    <img id="img01" src="svg_files/SalesHours_Custom.xlsm_Display.svg">
-    <img id="img02" src="svg_files/DirIndir_EngCustomPod.xlsm_Display.svg">
-    <img id="img03" src="svg_files/ContinuousImprovement.xlsm_CustomMfg.svg">
-    <img id="img04" src="">
-    <img id="img05" src="svg_files/safety_display_Custom Manufacturing Pod.svg">
-    <img id="img06" src="">
-    <img id="img07" src="">
-    <img id="img08" src="">
-    <img id="img09" src="">
-    <img id="img10" src="">
-    <img id="img11" src="">
-    <img id="img12" src="">
+    <canvas id="spot05"></canvas>
+    <canvas class="hidden" id="spot06"></canvas>
+  </div>
+  <div class="grid_row_2 grid">
+    <div class="twoFrame">
+      <div id="ec"></div>
+    </div>
+    <canvas class="hidden" id="spot07"></canvas>
+    <canvas class="hidden" id="spot08"></canvas>
+    <canvas class="hidden" id="spot09"></canvas>
+    <!-- <canvas id="spot09"></canvas> -->
+    <!-- <canvas id="spot10"></canvas>
+    <canvas id="spot11"></canvas> -->
+  </div>
+  <img id="img01" src="svg_files/SalesHours_Custom.xlsm_Display.svg">
+  <img id="img02" src="svg_files/DirIndir_EngCustomPod.xlsm_Display.svg">
+  <img id="img03" src="svg_files/ContinuousImprovement.xlsm_CustomMfg.svg">
+  <img id="img04" src="">
+  <img id="img05" src="svg_files/safety_display_Custom Manufacturing Pod.svg">
+  <img id="img06" src="">
+  <img id="img07" src="">
+  <img id="img08" src="">
+  <img id="img09" src="">
+  <img id="img10" src="">
+  <img id="img11" src="">
+  <img id="img12" src="">
+  <script src="calendarEvents.js"></script>
     <script>
       const images = document.querySelectorAll('img')
       const canvases = document.querySelectorAll('canvas')
@@ -132,7 +141,7 @@
               canvas.width = 752;
               break;
             case 4096:
-              canvas.width = 781;
+              canvas.width = 791;
               break;
             default:
               console.log('Unknown resolution');
@@ -248,6 +257,20 @@
           clearTimeout(resizeTimer);
           resizeTimer = setTimeout(draw_images, 1000);
       });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@event-calendar/build@4.7.1/dist/event-calendar.min.js"></script>
+    <script>
+        var ec = EventCalendar.create(document.getElementById('ec'), {
+            scrollTime: "6:30",
+            view: 'timeGridWeek',
+            slotHeight: 40,
+            nowIndicator: true,
+            hiddenDays: [0, 6],
+            events: CALENDAR_EVENTS,
+        });
+
+        // // If you later need to destroy the calendar then use
+        // EventCalendar.destroy(ec);
     </script>
 </body>
 </html>

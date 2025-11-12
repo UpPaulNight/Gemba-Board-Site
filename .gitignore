@@ -8,3 +8,4 @@ downloaded_ids.json
 *.log
 *.ipynb
 .venv
+calendarEvents.js
