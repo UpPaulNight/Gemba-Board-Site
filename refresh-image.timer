@@ -1,9 +1,9 @@
 [Unit]
-Description=Refresh on weekdays with 90 minutes of jitter
+Description=Refresh on weekdays every hour with 15 minutes of jitter
 
 [Timer]
-OnCalendar=Mon..Fri 05..20/1:30:00
-RandomizedDelaySec=20m
+OnCalendar=Mon..Fri 05..20/1:00:00
+RandomizedDelaySec=15m
 Persistent=true
 
 [Install]
