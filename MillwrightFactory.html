@@ -62,7 +62,7 @@
     }
   </style>
   <script>
-    let n = 60; // Minutes
+    let n = 15; // Minutes
 
     setTimeout(() => {
       window.location.href = window.location.pathname + "?t=" + new Date().getTime();
@@ -221,7 +221,7 @@
       let resizeTimer;
       window.addEventListener("resize", () => {
           clearTimeout(resizeTimer);
-          resizeTimer = setTimeout(draw_images, 1000); // adjust delay as needed
+          resizeTimer = setTimeout(draw_images, 1000);
       });
     </script>
 </body>
