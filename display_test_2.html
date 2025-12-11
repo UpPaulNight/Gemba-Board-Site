@@ -73,6 +73,36 @@
       }
     } */
   </style>
+  <style>
+    /* customizable snowflake styling */
+    .snowflake {
+      color: #fff;
+      font-size: 1em;
+      font-family: Arial, sans-serif;
+      text-shadow: 0 0 5px #000;
+    }
+    
+    .snowflake,.snowflake .inner{animation-iteration-count:infinite;animation-play-state:running}@keyframes snowflakes-fall{0%{transform:translateY(0)}100%{transform:translateY(110vh)}}@keyframes snowflakes-shake{0%,100%{transform:translateX(0)}50%{transform:translateX(80px)}}.snowflake{position:fixed;top:-10%;z-index:9999;-webkit-user-select:none;user-select:none;cursor:default;pointer-events:none;animation-name:snowflakes-shake;animation-duration:3s;animation-timing-function:ease-in-out}.snowflake .inner{animation-duration:10s;animation-name:snowflakes-fall;animation-timing-function:linear}.snowflake:nth-of-type(0){left:1%;animation-delay:0s}.snowflake:nth-of-type(0) .inner{animation-delay:0s}.snowflake:first-of-type{left:10%;animation-delay:1s}.snowflake:first-of-type .inner,.snowflake:nth-of-type(8) .inner{animation-delay:1s}.snowflake:nth-of-type(2){left:20%;animation-delay:.5s}.snowflake:nth-of-type(2) .inner,.snowflake:nth-of-type(6) .inner{animation-delay:6s}.snowflake:nth-of-type(3){left:30%;animation-delay:2s}.snowflake:nth-of-type(11) .inner,.snowflake:nth-of-type(3) .inner{animation-delay:4s}.snowflake:nth-of-type(4){left:40%;animation-delay:2s}.snowflake:nth-of-type(10) .inner,.snowflake:nth-of-type(4) .inner{animation-delay:2s}.snowflake:nth-of-type(5){left:50%;animation-delay:3s}.snowflake:nth-of-type(5) .inner{animation-delay:8s}.snowflake:nth-of-type(6){left:60%;animation-delay:2s}.snowflake:nth-of-type(7){left:70%;animation-delay:1s}.snowflake:nth-of-type(7) .inner{animation-delay:2.5s}.snowflake:nth-of-type(8){left:80%;animation-delay:0s}.snowflake:nth-of-type(9){left:90%;animation-delay:1.5s}.snowflake:nth-of-type(9) .inner{animation-delay:3s}.snowflake:nth-of-type(10){left:25%;animation-delay:0s}.snowflake:nth-of-type(11){left:65%;animation-delay:2.5s}
+  </style>
+  <style>
+    @keyframes lights {
+      0% {
+        background-position: top; 
+      } 
+      100% {
+        background-position: bottom;
+      }
+    }
+    #lights {
+      height:69px;
+      background:url(https://i.imgur.com/BdGY6tH.png);
+      animation: lights 1s infinite steps(2,jump-none);
+      position: absolute;
+      left: 0px;
+      right: 0px;
+      top: 10px;
+    }
+  </style>
   <script>
     let n = 15; // Minutes
 
@@ -88,13 +118,16 @@
         <canvas id="spot03"></canvas>
         <canvas id="spot04"></canvas>
         <canvas id="spot05"></canvas>
-        <canvas id="spot06"></canvas>
-        <canvas id="spot07"></canvas>
+        <div class="splitFrame">
+          <canvas id="spot06"></canvas>
+          <canvas id="spot07"></canvas>
+        </div>
         <canvas id="spot08"></canvas>
         <canvas id="spot09"></canvas>
+        <canvas id="spot10"></canvas>
         <div class="splitFrame">
-          <canvas id="spot10"></canvas>
           <canvas id="spot11"></canvas>
+          <canvas id="spot12"></canvas>
         </div>
     </div>
     <img id="img01" src="svg_files/safety_display_Company.svg">
@@ -103,11 +136,51 @@
     <img id="img04" src="svg_files/DirIndir_ALL_DEPARTMENTS.xlsm_Display.svg">
     <img id="img05" src="svg_files/Revenue.xlsm_Display.svg">
     <img id="img06" src="svg_files/ContinuousImprovement.xlsm_Company.svg">
-    <img id="img07" src="svg_files/SalesHoursByRep.xlsx_Display.svg">
-    <img id="img08" src="svg_files/AR_AGING_OVERDUE.xlsm_CompanyDisplay.svg">
-    <img id="img09" src="svg_files/LoadHoursRemaining_ALL_DEPARTMENTS.xlsm_Display.svg">
-    <img id="img10" src="svg_files/AP_Unreceived.xlsm_Display.svg">
-    <img id="img11" src="svg_files/AP_ReceivedNotInvoiced.xlsm_Display.svg">
+    <img id="img07" src="">
+    <img id="img08" src="svg_files/SalesHoursByRep.xlsx_Display.svg">
+    <img id="img09" src="svg_files/AR_AGING_OVERDUE.xlsm_DisplayBucketed.svg">
+    <img id="img10" src="svg_files/LoadHoursRemaining_ALL_DEPARTMENTS.xlsm_Display.svg">
+    <img id="img11" src="svg_files/AP_Unreceived.xlsm_Display.svg">
+    <img id="img12" src="svg_files/AP_ReceivedNotInvoiced.xlsm_Display.svg">
+    <div id="lights"></div>
+    <div class="snowflakes" aria-hidden="true">
+      <div class="snowflake">
+        <div class="inner">❅</div>
+      </div>
+      <div class="snowflake">
+        <div class="inner">❅</div>
+      </div>
+      <div class="snowflake">
+        <div class="inner">❅</div>
+      </div>
+      <div class="snowflake">
+        <div class="inner">❅</div>
+      </div>
+      <div class="snowflake">
+        <div class="inner">❅</div>
+      </div>
+      <div class="snowflake">
+        <div class="inner">❅</div>
+      </div>
+      <div class="snowflake">
+        <div class="inner">❅</div>
+      </div>
+      <div class="snowflake">
+        <div class="inner">❅</div>
+      </div>
+      <div class="snowflake">
+        <div class="inner">❅</div>
+      </div>
+      <div class="snowflake">
+        <div class="inner">❅</div>
+      </div>
+      <div class="snowflake">
+        <div class="inner">❅</div>
+      </div>
+      <div class="snowflake">
+        <div class="inner">❅</div>
+      </div>
+    </div>
     <script>
       images = document.querySelectorAll('img')
       canvases = document.querySelectorAll('canvas')
@@ -151,7 +224,7 @@
       }
 
       function drawAllImagesToCanvases() {
-        for (let i = 1; i <= 11; i++) {
+        for (let i = 1; i <= 12; i++) {
           const img = document.getElementById(`img${String(i).padStart(2, '0')}`);
           const canvas = document.getElementById(`spot${String(i).padStart(2, '0')}`);
           if (img && canvas) {
@@ -165,7 +238,7 @@
         setCanvasDimensions();
         
         let loadedCount = 0;
-        const imagesList = Array.from({length: 11}, (_, i) => document.getElementById(`img${String(i+1).padStart(2, '0')}`));
+        const imagesList = Array.from({length: 12}, (_, i) => document.getElementById(`img${String(i+1).padStart(2, '0')}`));
   
         imagesList.forEach(img => {
           if (img.complete) {
