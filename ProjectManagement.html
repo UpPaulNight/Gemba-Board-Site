@@ -3,26 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="Cache-Control" content="no-cache">
-  <title>Project Management Board</title>
+  <title>Supply Chain Procurement Board</title>
   <style>
     body {
       overflow: hidden;
       width: 100%;
       display: grid;
       place-items: center;
-      margin: 0px;
+      /* margin: 0px; */
       background-color: white;
     }
     .grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      column-gap: 18px;
-      row-gap: 18px;
+      grid-template-columns: repeat(5, 1fr);
       height: 3852px;
     }
     .grid>canvas {
-      background-color: black;
-      padding: 6px;
+      border: 6px solid black;
       border-radius: 33px;
     }
     .splitFrame {
@@ -42,7 +39,7 @@
       display: none;
     }
     #GembaName {
-      font-size: 86pt;
+      font-size: 78pt;
       font-family: "PT Serif";
       width: 100%;
       text-align: center;
@@ -60,6 +57,30 @@
     }
     .hidden {
       opacity: 0;
+    }
+    @media (max-height: 2160px) { /* Horizontal */
+      .splitFrameCanvasContainer {
+        height: 523.5px;
+        width: 752px;
+      }
+      .grid {
+        height: 2160px;
+        row-gap: 9px;
+        column-gap: 9px;
+      }
+      .splitFrame {
+        width: 763.2px;
+      }
+      .splitFrameCanvasContainer>canvas {
+        padding: 1px;
+      }
+    }
+    @media (max-width: 2160px) { /* Vertical */
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 18px;
+        column-gap: 18px;
+      }
     }
   </style>
   <style>
@@ -101,29 +122,31 @@
   </script>
 </head>
 <body>
-    <div id="GembaName">PROJECT MANAGEMENT GEMBA BOARD</div>
+    <!-- <div id="GembaName">SUPPLY CHAIN / PROCUREMENT GEMBA BOARD</div> -->
     <div class="grid">
       <canvas id="spot01"></canvas>
       <div class="splitFrame">
-        <div class="splitFrameCanvasContainer"><canvas id="spot02"></canvas></div>
-        <div class="splitFrameCanvasContainer hidden"><canvas id="spot03"></canvas></div>
+        <div class="splitFrameCanvasContainer"><canvas id="spot05"></canvas></div>
+        <div class="hidden splitFrameCanvasContainer"><canvas class="" id="spot06"></canvas></div>
       </div>
-      <canvas class="hidden" id="spot04"></canvas>
-      <canvas class="hidden" id="spot05"></canvas>
+      <canvas class="hidden" id="spot02"></canvas>
+      <div class="splitFrame">
+        <div class="hidden splitFrameCanvasContainer"><canvas id="spot03"></canvas></div>
+        <div class="hidden splitFrameCanvasContainer"><canvas id="spot04"></canvas></div>
+      </div>
       <canvas class="hidden" id="spot07"></canvas>
       <canvas class="hidden" id="spot08"></canvas>
-      <!-- <canvas id="spot08"></canvas>
-      <canvas id="spot09"></canvas> -->
+      <!-- <canvas id="spot09"></canvas> -->
       <!-- <canvas id="spot10"></canvas>
       <canvas id="spot11"></canvas> -->
     </div>
     <img id="img01" src="svg_files/safety_display_Project Management.svg">
-    <img id="img02" src="svg_files/ContinuousImprovement.xlsm_ProjectMgt.svg">
+    <img id="img02" src="">
     <img id="img03" src="">
     <img id="img04" src="">
-    <img id="img05" src="">
-    <img id="img06" class="hidden" src="">
-    <img id="img07" class="hidden" src="">
+    <img id="img05" src="svg_files/ContinuousImprovement.xlsm_ProjectMgt.svg">
+    <img id="img06" src="">
+    <img id="img07" src="">
     <img id="img08" src="">
     <img id="img09" src="">
     <img id="img10" src="">
@@ -192,7 +215,7 @@
           switch (window.screen.availWidth) {
             case 3840:
             case 4096:
-              canvas.width = 877;
+              canvas.width = 699;
               break;
             case 2160:
               canvas.width= 877;
@@ -208,7 +231,7 @@
         if (parentClassContains == 'grid') {
           switch (window.screen.height) {
             case 2160:
-              canvas.height = 1080;
+              canvas.height = 1063.5;
               break;
             case 3840:
             case 4096:
@@ -221,7 +244,7 @@
         } else if (parentClassContains == 'splitFrame') {
           switch (window.screen.height) {
             case 2160:
-              canvas.height = 540;
+              canvas.height = 521.25
               // canvas.height = 508;
               break;
             case 4096:
