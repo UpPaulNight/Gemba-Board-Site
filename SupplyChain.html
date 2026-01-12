@@ -44,16 +44,23 @@
       width: 100%;
       text-align: center;
     }
+    .splitFrame {
+      border: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 13px;
+    }
     .splitFrameCanvasContainer {
-      width: auto;
-      width: 1040px;
-      height: 618px;
-      flex-grow: 1;
-      border-radius: 33px;
+      border: 6px solid black;
+      border-radius: 11px;
+      width: 792.8px;
       display: flex;
       justify-content: center;
-      background-color: white;
-      border: 6px solid black;
+      flex: 1;
+    }
+    .splitFrameCanvasContainer>canvas {
+      height: 505.75px;
     }
     .hidden {
       opacity: 0;
