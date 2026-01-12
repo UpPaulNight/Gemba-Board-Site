@@ -9,31 +9,8 @@
       overflow: hidden;
       width: 100%;
       display: grid;
-      place-items: center;
-      /* margin: 0px; */
+      margin: 0px;
       background-color: white;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      height: 3852px;
-    }
-    .grid>canvas {
-      border: 6px solid black;
-      border-radius: 33px;
-    }
-    .splitFrame {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: auto;
-      justify-content: space-between;
-    }
-    .splitFrame>.splitFrameCanvasContainer:last-child {
-      margin-top: 6px;
-    }
-    .splitFrame>.splitFrameCanvasContainer:first-child {
-      margin-bottom: 6px;
     }
     img {
       display: none;
@@ -44,49 +21,38 @@
       width: 100%;
       text-align: center;
     }
-    .splitFrame {
-      border: none;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 13px;
-    }
-    .splitFrameCanvasContainer {
-      border: 6px solid black;
-      border-radius: 11px;
-      width: 792.8px;
-      display: flex;
-      justify-content: center;
-      flex: 1;
-    }
-    .splitFrameCanvasContainer>canvas {
-      height: 505.75px;
-    }
     .hidden {
       opacity: 0;
     }
-    @media (max-height: 2160px) { /* Horizontal */
-      .splitFrameCanvasContainer {
-        height: 523.5px;
-        width: 752px;
-      }
+    /* Horizontal */
+    @media (max-width: 3840px) and (max-height: 2160px) {
       .grid {
         height: 2160px;
-        row-gap: 9px;
-        column-gap: 9px;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        align-items: center;
+        justify-items: center;
+      }
+      .grid>canvas {
+        height: 1048.5px;
+        width: 740.4px;
+        border: 6px solid black;
+        border-radius: 33px;
       }
       .splitFrame {
-        width: 763.2px;
+        width: 752.4px;
+        height: 1060.5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 13px;
       }
-      .splitFrameCanvasContainer>canvas {
-        padding: 1px;
-      }
-    }
-    @media (max-width: 2160px) { /* Vertical */
-      .grid {
-        grid-template-columns: repeat(2, 1fr);
-        row-gap: 18px;
-        column-gap: 18px;
+      .splitFrame>.splitFrameCanvasContainer {
+        height: 1048.5px;
+        width: 740.4px;
+        border: 6px solid black;
+        border-radius: 22px;
+        height: 511.75px;
       }
     }
   </style>
@@ -141,7 +107,7 @@
         <div class="splitFrameCanvasContainer"><canvas id="spot05"></canvas></div>
         <div class="splitFrameCanvasContainer"><canvas class="" id="spot06"></canvas></div>
       </div>
-      <canvas class="hidden" id="spot07"></canvas>
+      <canvas class="" id="spot07"></canvas>
       <canvas id="spot09"></canvas>
       <div class="hidden"><canvas id="spot10"></canvas></div>
       <canvas class="hidden" id="spot08"></canvas>
@@ -155,7 +121,7 @@
     <img id="img04" src="svg_files/JobsComplNotClosed_SupplyChain.xlsm_Display.svg">
     <img id="img05" src="svg_files/ContinuousImprovement.xlsm_SupplyChain.svg">
     <img id="img06" src="svg_files/AP_Unreceived.xlsm_DisplaySupplyChain.svg">
-    <img id="img07" src="">
+    <img id="img07" src="svg_files/JobsNotWIPCleared.xlsx_WIPSupplyText.svg">
     <img id="img08" src="">
     <img id="img09" src="svg_files/JobsNotWIPCleared.xlsx_WIPSupplyText.svg">
     <img id="img10" src="">
@@ -207,15 +173,15 @@
       function setWidth(canvas, parentClassContains) {
         if (parentClassContains == 'grid') {
           switch (window.screen.availWidth) {
-            case 2160:
-              canvas.width = 1040;
-              break;
+            // case 2160:
+            //   canvas.width = 1048; // 1048.5
+            //   break;
             case 3840:
-              canvas.width = 752;
+              canvas.width = 740; // 740.4
               break;
-            case 4096:
-              canvas.width = 781;
-              break;
+            // case 4096:
+            //   canvas.width = 781;
+            //   break;
             default:
               console.log('Unknown resolution');
           }
@@ -224,11 +190,11 @@
           switch (window.screen.availWidth) {
             case 3840:
             case 4096:
-              canvas.width = 699;
+              canvas.width = 740; // 740.4
               break;
-            case 2160:
-              canvas.width= 877;
-              break;
+            // case 2160:
+            //   canvas.width= 877;
+            //   break;
             default:
               console.log('Unknown resolution');
           }
@@ -240,7 +206,7 @@
         if (parentClassContains == 'grid') {
           switch (window.screen.height) {
             case 2160:
-              canvas.height = 1063.5;
+              canvas.height = 1048; // 1048.5
               break;
             case 3840:
             case 4096:
@@ -253,7 +219,7 @@
         } else if (parentClassContains == 'splitFrame') {
           switch (window.screen.height) {
             case 2160:
-              canvas.height = 521.25
+              canvas.height = 511.75
               // canvas.height = 508;
               break;
             case 4096:
@@ -291,6 +257,15 @@
         ctx.rect(0, 0, canvas.width, canvas.height);
         ctx.fill();
         ctx.drawImage(image, x, y, w, h);
+
+        // We need the sides to be transparent so that they don't overlap the
+        // borders of the canvas container divs. Solution is to clearRect an
+        // area at the sides.
+        if (canvas.parentElement.classList.contains('splitFrameCanvasContainer')) {
+          const sideWidth = 13;
+          ctx.clearRect(0, 0, sideWidth, canvas.height); // left side
+          ctx.clearRect(canvas.width - sideWidth, 0, sideWidth, canvas.height); // right side
+        }
       }
 
       function drawAllImagesToCanvases() {
