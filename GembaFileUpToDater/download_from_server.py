@@ -7,9 +7,11 @@ from GembaFileUpToDater.epicor_communications import File_Operations, Ice_LIB_Fi
 from GembaFileUpToDater.AccessGembaFiles import AccessGembaFiles
 from dotenv import dotenv_values
 
-class FileIDPair(TypedDict):
+class FileInformation(TypedDict):
     SysID: str
     FileName: str
+    DatePosted: str
+    ImageID: str
 
 from GembaFileUpToDater.parse_args import should_show_debug
 import logging
@@ -23,7 +25,7 @@ EpicorCommunicator.company_ID = 'PAUL01'
 EpicorCommunicator.url_domain = 'https://kinetic.paulsmachine.com'
 EpicorCommunicator.url_app_path = 'Kinetic'
 
-def __get_downloaded_file_ids() -> list[FileIDPair]:
+def __get_downloaded_file_ids() -> list[FileInformation]:
     
     if not os.path.exists(ID_FILE):
         return []
@@ -35,10 +37,10 @@ def __get_downloaded_file_ids() -> list[FileIDPair]:
     except json.JSONDecodeError:
         return []
     
-def __store_downloaded_file_ids(id_pairs: list[FileIDPair]) -> None:
+def __store_downloaded_file_ids(id_pairs: list[FileInformation]) -> None:
 
     with open(ID_FILE, 'w+') as f:
-        return json.dump(id_pairs, f)
+        return json.dump(id_pairs, f, indent=4)
 
 def download_new_files() -> None:
 
@@ -54,8 +56,8 @@ def download_new_files() -> None:
     server_files_df = server_files_df.astype({'PostDate': 'datetime64[ns]'})
     server_files_df = server_files_df.sort_values(['FileName', 'PostDate'], ascending=[True, False])
     newest_files_df_2 = server_files_df.groupby(['FileName']).head(1)
-    newest_files: list[FileIDPair] = [
-        {'FileName': row['FileName'], 'SysID': row['FileSysRowID']}
+    newest_files: list[FileInformation] = [
+        {'FileName': row['FileName'], 'SysID': row['FileSysRowID'], 'DatePosted': row['PostDate'].isoformat(), 'ImageID': row['Key2'][-5:]}
         for _, row in newest_files_df_2.iterrows()
     ]
 
@@ -85,7 +87,7 @@ def download_new_files() -> None:
     os.makedirs('svg_files', exist_ok=True)
 
     # Loop over all of those files and download them
-    files_updated: list[FileIDPair] = []
+    files_updated: list[FileInformation] = []
     for file in files_need_updating + files_dont_have:
 
         file_bytes = Ice_LIB_FileStoreSvc.read_all_bytes(file['SysID'])
