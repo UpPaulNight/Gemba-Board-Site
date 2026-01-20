@@ -9,3 +9,4 @@ downloaded_ids.json
 *.ipynb
 .venv
 calendarEvents.js
+node_modules
