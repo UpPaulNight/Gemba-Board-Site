@@ -1,305 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="Cache-Control" content="no-cache">
-  <title>BUILDING #1 #2 #3 BOARD</title>
-  <style>
-    body {
-      overflow: hidden;
-      width: 100%;
-      display: grid;
-      place-items: center;
-      margin: 0px;
-      background-color: white;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      column-gap: 18px;
-      row-gap: 18px;
-      height: 3852px;
-    }
-    .grid>canvas {
-      background-color: black;
-      padding: 6px;
-      border-radius: 33px;
-    }
-    .splitFrame {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: auto;
-      justify-content: space-between;
-    }
-    .splitFrame>.splitFrameCanvasContainer:last-child {
-      margin-top: 6px;
-    }
-    .splitFrame>.splitFrameCanvasContainer:first-child {
-      margin-bottom: 6px;
-    }
-    img {
-      display: none;
-    }
-    #GembaName {
-      font-size: 99pt;
-      font-family: "PT Serif";
-      width: 100%;
-      text-align: center;
-    }
-    .splitFrameCanvasContainer {
-      width: auto;
-      width: 1040px;
-      height: 618px;
-      flex-grow: 1;
-      border-radius: 33px;
-      display: flex;
-      justify-content: center;
-      background-color: white;
-      border: 6px solid black;
-    }
-    .hidden {
-      opacity: 0;
-    }
-  </style>
-  <style>
-    /* customizable snowflake styling */
-    .snowflake {
-      color: #fff;
-      font-size: 1em;
-      font-family: Arial, sans-serif;
-      text-shadow: 0 0 5px #000;
-    }
-    
-    .snowflake,.snowflake .inner{animation-iteration-count:infinite;animation-play-state:running}@keyframes snowflakes-fall{0%{transform:translateY(0)}100%{transform:translateY(110vh)}}@keyframes snowflakes-shake{0%,100%{transform:translateX(0)}50%{transform:translateX(80px)}}.snowflake{position:fixed;top:-10%;z-index:9999;-webkit-user-select:none;user-select:none;cursor:default;pointer-events:none;animation-name:snowflakes-shake;animation-duration:3s;animation-timing-function:ease-in-out}.snowflake .inner{animation-duration:10s;animation-name:snowflakes-fall;animation-timing-function:linear}.snowflake:nth-of-type(0){left:1%;animation-delay:0s}.snowflake:nth-of-type(0) .inner{animation-delay:0s}.snowflake:first-of-type{left:10%;animation-delay:1s}.snowflake:first-of-type .inner,.snowflake:nth-of-type(8) .inner{animation-delay:1s}.snowflake:nth-of-type(2){left:20%;animation-delay:.5s}.snowflake:nth-of-type(2) .inner,.snowflake:nth-of-type(6) .inner{animation-delay:6s}.snowflake:nth-of-type(3){left:30%;animation-delay:2s}.snowflake:nth-of-type(11) .inner,.snowflake:nth-of-type(3) .inner{animation-delay:4s}.snowflake:nth-of-type(4){left:40%;animation-delay:2s}.snowflake:nth-of-type(10) .inner,.snowflake:nth-of-type(4) .inner{animation-delay:2s}.snowflake:nth-of-type(5){left:50%;animation-delay:3s}.snowflake:nth-of-type(5) .inner{animation-delay:8s}.snowflake:nth-of-type(6){left:60%;animation-delay:2s}.snowflake:nth-of-type(7){left:70%;animation-delay:1s}.snowflake:nth-of-type(7) .inner{animation-delay:2.5s}.snowflake:nth-of-type(8){left:80%;animation-delay:0s}.snowflake:nth-of-type(9){left:90%;animation-delay:1.5s}.snowflake:nth-of-type(9) .inner{animation-delay:3s}.snowflake:nth-of-type(10){left:25%;animation-delay:0s}.snowflake:nth-of-type(11){left:65%;animation-delay:2.5s}
-  </style>
-  <style>
-    @keyframes lights {
-      0% {
-        background-position: top; 
-      } 
-      100% {
-        background-position: bottom;
-      }
-    }
-    #lights {
-      height:69px;
-      background:url(https://i.imgur.com/BdGY6tH.png);
-      animation: lights 1s infinite steps(2,jump-none);
-      position: absolute;
-      left: 0px;
-      right: 0px;
-      top: 0px;
-    }
-  </style>
-  <script>
-    let n = 15; // Minutes
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <title>BUILDING #1 #2 #3 BOARD</title>
 
-    setTimeout(() => {
-      window.location.href = window.location.pathname + "?t=" + new Date().getTime();
-    }, n * 1000 * 60);
-  </script>
+    <script src="node_modules/gridstack/dist/gridstack-all.js"></script>
+    <link href="node_modules/gridstack/dist/gridstack.min.css" rel="stylesheet"/>
+    <style type="text/css">
+        /* .grid-stack {
+            background: #FAFAD2;
+            width: 2160px;
+            height: 4096px;
+        } */
+        .grid-stack-item-content {
+            overflow: visible !important;
+        }
+
+        /* Give border */
+        .grid-stack-item-content:not(:has(#GembaName)) {
+            border: 6px solid black;
+            border-radius: 33px;
+        }
+
+        body {
+            width: 2160px;
+            height: 4096px;
+            margin: 0px;
+        }
+
+        .grid-stack-item-content {
+            display: flex;
+            justify-content: center; /* Centers content horizontally */
+            align-items: center;     /* Centers content vertically */
+        }
+        #theBackground {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 2160px;
+            height: 4096px;
+            /* background-color: #f0f0f0; */
+            z-index: -1; /* Ensure it's behind other content */
+        }
+        #GembaName {
+            font-size: 99pt;
+            font-family: "PT Serif";
+            width: 100%;
+            text-align: center;
+            overflow: visible;
+        }
+    </style>
+    <script src="scripts/imageLoading.js"></script>
+    <script src="scripts/imageDrawing.js"></script>
+    <script src="scripts/gridStackManager.js"></script>
 </head>
 <body>
-    <div id="GembaName">BUILDING #1 #2 #3 GEMBA BOARD</div>
-    <div class="grid">
-      <canvas id="spot02"></canvas>
-      <canvas id="spot01"></canvas>
-    <div class="splitFrame">
-      <div class="splitFrameCanvasContainer"><canvas id="spot03"></canvas></div>
-      <div class="splitFrameCanvasContainer"><canvas id="spot04"></canvas></div>
-    </div>
-    <div class="splitFrame">
-      <div class="splitFrameCanvasContainer"><canvas id="spot05"></canvas></div>
-      <div class="splitFrameCanvasContainer"><canvas class="" id="spot06"></canvas></div>
-    </div>
-    <canvas id="spot07"></canvas>
-    <canvas id="spot08"></canvas>
-      <!-- <canvas id="spot09"></canvas> -->
-      <!-- <canvas id="spot10"></canvas>
-      <canvas id="spot11"></canvas> -->
-    </div>
-    <img id="img01" src="svg_files/Quality_Millwright.xlsm_Display.svg">
-    <img id="img02" src="svg_files/DirIndir_MillwrightGrain.xlsm_Display.svg">
-    <img id="img03" src="svg_files/ContinuousImprovement.xlsm_MLWBuilding2.svg">
-    <img id="img04" src="svg_files/ContinuousImprovement.xlsm_MLWBuilding3.svg">
-    <img id="img05" src="svg_files/ContinuousImprovement.xlsm_MLWBuilding1.svg">
-    <img id="img06" src="svg_files/ContinuousImprovement.xlsm_MLWTruck.svg">
-    <img id="img07" src="svg_files/safety_display_Millwright Grain.svg">
-    <img id="img08" src="">
-    <img id="img09" src="">
-    <img id="img10" src="">
-    <img id="img11" src="">
-    <img id="img12" src="">
-    <div id="lights"></div>
-    <div class="snowflakes" aria-hidden="true">
-      <div class="snowflake">
-        <div class="inner">❅</div>
-      </div>
-      <div class="snowflake">
-        <div class="inner">❅</div>
-      </div>
-      <div class="snowflake">
-        <div class="inner">❅</div>
-      </div>
-      <div class="snowflake">
-        <div class="inner">❅</div>
-      </div>
-      <div class="snowflake">
-        <div class="inner">❅</div>
-      </div>
-      <div class="snowflake">
-        <div class="inner">❅</div>
-      </div>
-      <div class="snowflake">
-        <div class="inner">❅</div>
-      </div>
-      <div class="snowflake">
-        <div class="inner">❅</div>
-      </div>
-      <div class="snowflake">
-        <div class="inner">❅</div>
-      </div>
-      <div class="snowflake">
-        <div class="inner">❅</div>
-      </div>
-      <div class="snowflake">
-        <div class="inner">❅</div>
-      </div>
-      <div class="snowflake">
-        <div class="inner">❅</div>
-      </div>
-    </div>
-    <script>
-      const images = document.querySelectorAll('img')
-      const canvases = document.querySelectorAll('canvas')
 
-      function setWidth(canvas, parentClassContains) {
-        if (parentClassContains == 'grid') {
-          switch (window.screen.availWidth) {
-            case 2160:
-              canvas.width = 1040;
-              break;
-            case 3840:
-              canvas.width = 752;
-              break;
-            case 4096:
-              canvas.width = 781;
-              break;
-            default:
-              console.log('Unknown resolution');
-          }
+    <!-- The background div -->
+    <div id="theBackground"></div>
+    <div class="grid-stack"></div>
 
-        } else if (parentClassContains == 'splitFrame') {
-          switch (window.screen.availWidth) {
-            case 3840:
-            case 4096:
-              canvas.width = 877;
-              break;
-            case 2160:
-              canvas.width= 877;
-              break;
-            default:
-              console.log('Unknown resolution');
-          }
-        }
-      }
+    <script type="text/javascript">
+    
+    const LOCAL_STORAGE_KEY = 'CamargoBuildings_GembaBoard_GridStackConfig';
+    console.log('Initializing gridstack');
+    initializeGridStack();
 
-      function setHeight(canvas, parentClassContains) {
-
-        if (parentClassContains == 'grid') {
-          switch (window.screen.height) {
-            case 2160:
-              canvas.height = 1080;
-              break;
-            case 3840:
-            case 4096:
-              canvas.height = 1260;
-              break;
-            default:
-              console.log('Unknown resolution');
-          }
-
-        } else if (parentClassContains == 'splitFrame') {
-          switch (window.screen.height) {
-            case 2160:
-              canvas.height = 540;
-              // canvas.height = 508;
-              break;
-            case 4096:
-            case 3840:
-              canvas.height = 618;
-              break;
-            default:
-              console.log('Unknown resolution');
-          }
-        }
-      }
-      
-      function setCanvasDimensions() {
-
-        console.log('Resizing canvases...');
-        console.log('Screen Width: ' + window.screen.availWidth);
-        console.log('Screen Height: ' + window.screen.availHeight);
-        
-        canvases.forEach(canvas => {
-          const parent = canvas.parentElement;
-          const parentClassContains = parent.classList.contains('grid') ? 'grid' : parent.classList.contains('splitFrameCanvasContainer') ? 'splitFrame' : '';
-          setWidth(canvas, parentClassContains);
-          setHeight(canvas, parentClassContains);
-        });
-      }
-
-      function drawImageToCanvas(image, canvas) {
-        const ctx = canvas.getContext("2d");
-        const scale = Math.min(canvas.width / image.width, canvas.height / image.height);
-        const w = image.width * scale;
-        const h = image.height * scale;
-        const x = (canvas.width - w) / 2; // center horizontally
-        const y = (canvas.height - h) / 2; // center vertically
-        ctx.fillStyle = "white";
-        ctx.rect(0, 0, canvas.width, canvas.height);
-        ctx.fill();
-        ctx.drawImage(image, x, y, w, h);
-      }
-
-      function drawAllImagesToCanvases() {
-        for (let i = 1; i <= 12; i++) {
-          const img = document.getElementById(`img${String(i).padStart(2, '0')}`);
-          const canvas = document.getElementById(`spot${String(i).padStart(2, '0')}`);
-          if (img && canvas) {
-            drawImageToCanvas(img, canvas);
-          }
-        }
-      }
-
-      
-      function draw_images() {
-        setCanvasDimensions();
-        
-        let loadedCount = 0;
-        const imagesList = Array.from({length: 12}, (_, i) => document.getElementById(`img${String(i+1).padStart(2, '0')}`));
-  
-        imagesList.forEach(img => {
-          if (img.complete) {
-            loadedCount++;
-            if (loadedCount === imagesList.length) drawAllImagesToCanvases();
-          } else {
-            img.addEventListener('load', () => {
-              loadedCount++;
-              if (loadedCount === imagesList.length) drawAllImagesToCanvases();
-            });
-          }
-        });
-      }
-
-      window.addEventListener("load", draw_images);
-      
-      let resizeTimer;
-      window.addEventListener("resize", () => {
-          clearTimeout(resizeTimer);
-          resizeTimer = setTimeout(draw_images, 1000);
-      });
+    // For now, force a reload. Eventually though...
+    const n = 15; // minutes
+    setTimeout(() => {
+        window.location.href = window.location.pathname + "?t=" + new Date().getTime();
+    }, n * 1000 * 60);
     </script>
 </body>
 </html>
