@@ -11,7 +11,7 @@
         /* .grid-stack {
             background: #FAFAD2;
             width: 2160px;
-            height: 4096px;
+            height: 3840px;
         } */
         .grid-stack-item-content {
             overflow: visible !important;
@@ -25,7 +25,7 @@
 
         body {
             width: 2160px;
-            height: 4096px;
+            height: 3840px;
             margin: 0px;
         }
 
@@ -35,11 +35,11 @@
             align-items: center;     /* Centers content vertically */
         }
         #theBackground {
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
             width: 2160px;
-            height: 4096px;
+            height: 3840px;
             /* background-color: #f0f0f0; */
             z-index: -1; /* Ensure it's behind other content */
         }
@@ -49,6 +49,9 @@
             width: 100%;
             text-align: center;
             overflow: visible;
+        }
+        canvas {
+            z-index: -1;
         }
     </style>
     <script src="scripts/imageLoading.js"></script>
@@ -63,7 +66,7 @@
 
     <script type="text/javascript">
     
-    const LOCAL_STORAGE_KEY = 'CamargoBuildings_GembaBoard_GridStackConfig';
+    const LOCAL_STORAGE_KEY = 'Fabrication_GembaBoard_GridStackConfig';
     console.log('Initializing gridstack');
     initializeGridStack();
 
