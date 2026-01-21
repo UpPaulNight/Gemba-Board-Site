@@ -1,0 +1,12 @@
+[Unit]
+Description=Open Gemba Board in browser
+After=graphical-session.target
+Wants=graphical-session.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/chromium --kiosk http://127.0.0.1:8000/index.html
+RemainAfterExit=yes
+
+[Install]
+WantedBy=default.target
