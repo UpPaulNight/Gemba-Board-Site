@@ -15,5 +15,8 @@
     "url": "https://github.com/UpPaulNight/Gemba-Board-Site/issues"
   },
   "homepage": "https://github.com/UpPaulNight/Gemba-Board-Site#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "gridstack": "^12.4.2"
+  }
 }

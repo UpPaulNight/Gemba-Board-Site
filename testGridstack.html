@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <title>Test Gridstack</title>
+
+    <script src="node_modules/gridstack/dist/gridstack-all.js"></script>
+    <link href="node_modules/gridstack/dist/gridstack.min.css" rel="stylesheet"/>
+    <style type="text/css">
+        /* .grid-stack {
+            background: #FAFAD2;
+            width: 2160px;
+            height: 4096px;
+        } */
+        .grid-stack-item-content {
+            overflow: visible !important;
+        }
+
+        /* Give border */
+        .grid-stack-item-content:not(:has(#GembaName)) {
+            border: 6px solid black;
+            border-radius: 33px;
+        }
+
+        body {
+            width: 2160px;
+            height: 4096px;
+            margin: 0px;
+        }
+
+        .grid-stack-item-content {
+            display: flex;
+            justify-content: center; /* Centers content horizontally */
+            align-items: center;     /* Centers content vertically */
+        }
+        #theBackground {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 2160px;
+            height: 4096px;
+            /* background-color: #f0f0f0; */
+            z-index: -1; /* Ensure it's behind other content */
+        }
+        #GembaName {
+            font-size: 99pt;
+            font-family: "PT Serif";
+            width: 100%;
+            text-align: center;
+            overflow: visible;
+        }
+    </style>
+    <script src="scripts/imageLoading.js"></script>
+    <script src="scripts/imageDrawing.js"></script>
+    <script src="scripts/gridStackManager.js"></script>
+</head>
+<body>
+
+    <!-- The background div -->
+    <div id="theBackground"></div>
+    <div class="grid-stack"></div>
+
+    <script type="text/javascript">
+    
+    const LOCAL_STORAGE_KEY = 'CamargoBuildings_GembaBoard_GridStackConfig';
+    console.log('Initializing gridstack');
+    initializeGridStack();
+
+    // For now, force a reload. Eventually though...
+    const n = 15; // minutes
+    setTimeout(() => {
+        window.location.href = window.location.pathname + "?t=" + new Date().getTime();
+    }, n * 1000 * 60);
+    </script>
+</body>
+
+</html>

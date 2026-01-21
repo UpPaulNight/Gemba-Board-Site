@@ -11,7 +11,7 @@ class FileInformation(TypedDict):
     SysID: str
     FileName: str
     DatePosted: str
-    ImageID: str
+    SequenceNumber: str
 
 from GembaFileUpToDater.parse_args import should_show_debug
 import logging
@@ -57,7 +57,7 @@ def download_new_files() -> None:
     server_files_df = server_files_df.sort_values(['FileName', 'PostDate'], ascending=[True, False])
     newest_files_df_2 = server_files_df.groupby(['FileName']).head(1)
     newest_files: list[FileInformation] = [
-        {'FileName': row['FileName'], 'SysID': row['FileSysRowID'], 'DatePosted': row['PostDate'].isoformat(), 'ImageID': row['Key2'][-5:]}
+        {'FileName': row['FileName'], 'SysID': row['FileSysRowID'], 'DatePosted': row['PostDate'].isoformat(), 'SequenceNumber': row['Key2'][-5:]}
         for _, row in newest_files_df_2.iterrows()
     ]
 
