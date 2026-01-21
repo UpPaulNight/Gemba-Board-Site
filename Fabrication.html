@@ -66,16 +66,6 @@
 
     <script type="text/javascript">
     
-    const LOCAL_STORAGE_KEY = 'Fabrication_GembaBoard_GridStackConfig';
-    console.log('Initializing gridstack');
-    initializeGridStack();
-
-    // For now, force a reload. Eventually though...
-    const n = 15; // minutes
-    setTimeout(() => {
-        window.location.href = window.location.pathname + "?t=" + new Date().getTime();
-    }, n * 1000 * 60);
-
     const defaultGridStackConfig = {
         'safety_display_Fabrication': {
             id: 'safety_display_Fabrication',
@@ -107,6 +97,16 @@
             content: '<div id="GembaName">FABRICATION GEMBA BOARD</div>'
         }
     };
+    const LOCAL_STORAGE_KEY = 'Fabrication_GembaBoard_GridStackConfig';
+    console.log('Initializing gridstack');
+    initializeGridStack();
+
+    // For now, force a reload. Eventually though...
+    const n = 15; // minutes
+    setTimeout(() => {
+        window.location.href = window.location.pathname + "?t=" + new Date().getTime();
+    }, n * 1000 * 60);
+
     </script>
 </body>
 </html>
