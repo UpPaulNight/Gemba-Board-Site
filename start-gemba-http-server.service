@@ -1,0 +1,14 @@
+[Unit]
+Description=Start Python server to serve gemba files
+After=local-fs.target
+
+[Service]
+Type=simple
+User=pauls
+WorkingDirectory=/home/pauls/Gemba-Board-Site
+ExecStart=/usr/bin/python3 -m http.server 8000 --bind 127.0.0.1 --directory /home/pauls/Gemba-Board-Site
+Restart=on-failure
+RestartSec=2s
+
+[Install]
+WantedBy=multi-user.target
