@@ -4,56 +4,7 @@
 // id: string (dynamic)
 // imageUrl: string
 // seqNumber: string (dynamic)
-const defaultGridStackConfig = {
-    'Quality_Millwright.xlsm_Display': {
-        id: 'Quality_Millwright.xlsm_Display',
-        imageUrl: 'svg_files/Quality_Millwright.xlsm_Display.svg',
-        seqNumber: '12227',
-        gridPosition: {x: 0, y: 0, w: 4, h: 4}
-    },
-    'DirIndir_MillwrightGrain.xlsm_Display.svg': {
-        id: 'DirIndir_MillwrightGrain.xlsm_Display.svg',
-        imageUrl: 'svg_files/DirIndir_MillwrightGrain.xlsm_Display.svg',
-        seqNumber: '12227',
-        gridPosition: {x: 4, y: 0, w: 4, h: 4}
-    },
-    'ContinuousImprovement.xlsm_MLWBuilding2.svg': {
-        id: 'ContinuousImprovement.xlsm_MLWBuilding2.svg',
-        imageUrl: 'svg_files/ContinuousImprovement.xlsm_MLWBuilding2.svg',
-        seqNumber: '12227',
-        gridPosition: {x: 4, y: 0, w: 4, h: 4}
-    },
-    'ContinuousImprovement.xlsm_MLWBuilding3.svg': {
-        id: 'ContinuousImprovement.xlsm_MLWBuilding3.svg',
-        imageUrl: 'svg_files/ContinuousImprovement.xlsm_MLWBuilding3.svg',
-        seqNumber: '12227',
-        gridPosition: {x: 4, y: 0, w: 4, h: 4}
-    },
-    'ContinuousImprovement.xlsm_MLWBuilding1.svg': {
-        id: 'ContinuousImprovement.xlsm_MLWBuilding1.svg',
-        imageUrl: 'svg_files/ContinuousImprovement.xlsm_MLWBuilding1.svg',
-        seqNumber: '12227',
-        gridPosition: {x: 4, y: 0, w: 4, h: 4}
-    },
-    'ContinuousImprovement.xlsm_MLWTruck.svg': {
-        id: 'ContinuousImprovement.xlsm_MLWTruck.svg',
-        imageUrl: 'svg_files/ContinuousImprovement.xlsm_MLWTruck.svg',
-        seqNumber: '12227',
-        gridPosition: {x: 4, y: 0, w: 4, h: 4}
-    },
-    'safety_display_Millwright Grain.svg': {
-        id: 'safety_display_Millwright Grain.svg',
-        imageUrl: 'svg_files/safety_display_Millwright Grain.svg',
-        seqNumber: '12227',
-        gridPosition: {x: 4, y: 0, w: 4, h: 4}
-    },
-    'TITLE': {
-        id: 'TITLE',
-        gridPosition: {x: 0, y: 0, w: 12, h: 1},
-        content: '<div id="GembaName">BUILDING #1 #2 #3 GEMBA BOARD</div>'
-    }
-};
-const gridStackConfig = { ...defaultGridStackConfig };
+const gridStackConfig = {};
 let grid;
 
 // We should use local storage to keep a consistent config over reloads
@@ -61,6 +12,9 @@ function loadGridStackConfigFromLocalStorage() {
     const storedConfig = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (storedConfig) {
         Object.assign(gridStackConfig, JSON.parse(storedConfig));
+    } else {
+        console.log('No existing gridstack config found in local storage.');
+        Object.assign(gridStackConfig, defaultGridStackConfig);
     }
 }
 
