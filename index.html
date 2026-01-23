@@ -1,265 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="Cache-Control" content="no-cache">
-  <title>Image Grid</title>
-  <style>
-    body {
-      overflow: hidden;
-      height: 100%;
-      display: grid;
-      place-items: center;
-      margin: 0px;
-      background-color: black;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      column-gap: 18px;
-    }
-    .grid > * {
-      clip-path: inset(20px 8px 10px 8px round 12px);
-    }
-    .grid>canvas {
-      background-color: white;
-    }
-    .splitFrame {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: auto;
-    }
-    .splitFrame>canvas:last-child {
-      clip-path: inset(6px 6px 6px 6px round 12px 12px 0 0);
-    }
-    .splitFrame>canvas:first-child {
-      clip-path: inset(6px 6px 6px 6px round 0 0 12px 12px);;
-    }
-    .splitFrame>canvas {
-      width: auto;
-      background-color: white;
-    }
-    img {
-      display: none;
-    }
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <title>Main Board</title>
 
-    /* @media (min-width: 3840px) and (min-height: 2160px) {
-      .grid>canvas {
-        height: 1088px;
-        width: 740px;
-      }
-      .splitFrame {
-        height: 1088px;
-        width: 740px;
-      }
-      .splitFrame>canvas {
-        height: 540px;
-        width: 740px;
-      }
-    }
-    @media (min-width: 4096px) and (min-height: 2160px) {
-      .grid>canvas {
-        height: 1080px;
-        width: 781px;
-      }
-      .splitFrame {
-        height: 1080px;
-        width: 781px;
-      }
-      .splitFrame>canvas {
-        height: 540px;
-        width: 781px;
-      }
-    } */
-  </style>
-  <style>
-    /* customizable snowflake styling */
-    .snowflake {
-      color: #fff;
-      font-size: 1em;
-      font-family: Arial, sans-serif;
-      text-shadow: 0 0 5px #000;
-    }
-    
-    .snowflake,.snowflake .inner{animation-iteration-count:infinite;animation-play-state:running}@keyframes snowflakes-fall{0%{transform:translateY(0)}100%{transform:translateY(110vh)}}@keyframes snowflakes-shake{0%,100%{transform:translateX(0)}50%{transform:translateX(80px)}}.snowflake{position:fixed;top:-10%;z-index:9999;-webkit-user-select:none;user-select:none;cursor:default;pointer-events:none;animation-name:snowflakes-shake;animation-duration:3s;animation-timing-function:ease-in-out}.snowflake .inner{animation-duration:10s;animation-name:snowflakes-fall;animation-timing-function:linear}.snowflake:nth-of-type(0){left:1%;animation-delay:0s}.snowflake:nth-of-type(0) .inner{animation-delay:0s}.snowflake:first-of-type{left:10%;animation-delay:1s}.snowflake:first-of-type .inner,.snowflake:nth-of-type(8) .inner{animation-delay:1s}.snowflake:nth-of-type(2){left:20%;animation-delay:.5s}.snowflake:nth-of-type(2) .inner,.snowflake:nth-of-type(6) .inner{animation-delay:6s}.snowflake:nth-of-type(3){left:30%;animation-delay:2s}.snowflake:nth-of-type(11) .inner,.snowflake:nth-of-type(3) .inner{animation-delay:4s}.snowflake:nth-of-type(4){left:40%;animation-delay:2s}.snowflake:nth-of-type(10) .inner,.snowflake:nth-of-type(4) .inner{animation-delay:2s}.snowflake:nth-of-type(5){left:50%;animation-delay:3s}.snowflake:nth-of-type(5) .inner{animation-delay:8s}.snowflake:nth-of-type(6){left:60%;animation-delay:2s}.snowflake:nth-of-type(7){left:70%;animation-delay:1s}.snowflake:nth-of-type(7) .inner{animation-delay:2.5s}.snowflake:nth-of-type(8){left:80%;animation-delay:0s}.snowflake:nth-of-type(9){left:90%;animation-delay:1.5s}.snowflake:nth-of-type(9) .inner{animation-delay:3s}.snowflake:nth-of-type(10){left:25%;animation-delay:0s}.snowflake:nth-of-type(11){left:65%;animation-delay:2.5s}
-  </style>
-  <style>
-    @keyframes lights {
-      0% {
-        background-position: top; 
-      } 
-      100% {
-        background-position: bottom;
-      }
-    }
-    #lights {
-      height:69px;
-      background:url(https://i.imgur.com/BdGY6tH.png);
-      animation: lights 1s infinite steps(2,jump-none);
-      position: absolute;
-      left: 0px;
-      right: 0px;
-      top: 10px;
-    }
-  </style>
-  <script>
-    let n = 15; // Minutes
+    <script src="node_modules/gridstack/dist/gridstack-all.js"></script>
+    <link href="node_modules/gridstack/dist/gridstack.min.css" rel="stylesheet"/>
+    <style type="text/css">
+        /* .grid-stack {
+            background: #FAFAD2;
+            width: 2160px;
+            height: 3840px;
+        } */
+        .grid-stack-item-content {
+            overflow: visible !important;
+        }
 
-    setTimeout(() => {
-      window.location.href = window.location.pathname + "?t=" + new Date().getTime();
-    }, n * 1000 * 60);
-  </script>
+        /* Give border */
+        .grid-stack-item-content:not(:has(#GembaName)) {
+            border: 6px solid black;
+            border-radius: 33px;
+        }
+
+        body {
+            width: 3840px;
+            height: 2160px;
+            margin: 0px;
+        }
+
+        .grid-stack-item-content {
+            display: flex;
+            justify-content: center; /* Centers content horizontally */
+            align-items: center;     /* Centers content vertically */
+        }
+        #theBackground {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3840px;
+            height: 2160px;
+            /* background-color: #f0f0f0; */
+            z-index: -1; /* Ensure it's behind other content */
+        }
+        #GembaName {
+            font-size: 99pt;
+            font-family: "PT Serif";
+            width: 100%;
+            text-align: center;
+            overflow: visible;
+        }
+        canvas {
+            z-index: -1;
+        }
+    </style>
+    <script src="scripts/imageLoading.js?v=1"></script>
+    <script src="scripts/imageDrawing.js?v=1"></script>
+    <script src="scripts/gridStackManager.js?v=1"></script>
 </head>
 <body>
-    <div class="grid">
-        <canvas id="spot01"></canvas>
-        <canvas id="spot02"></canvas>
-        <canvas id="spot03"></canvas>
-        <canvas id="spot04"></canvas>
-        <canvas id="spot05"></canvas>
-        <div class="splitFrame">
-          <canvas id="spot06"></canvas>
-          <canvas id="spot07"></canvas>
-        </div>
-        <canvas id="spot08"></canvas>
-        <canvas id="spot09"></canvas>
-        <canvas id="spot10"></canvas>
-        <div class="splitFrame">
-          <canvas id="spot11"></canvas>
-          <canvas id="spot12"></canvas>
-        </div>
-    </div>
-    <img id="img01" src="svg_files/safety_display_Company.svg">
-    <img id="img02" src="svg_files/Quality_ALL_DEPARTMENTS.xlsm_Display.svg">
-    <img id="img03" src="svg_files/DeliveryOnTime.xlsm_Display.svg">
-    <img id="img04" src="svg_files/DirIndir_ALL_DEPARTMENTS.xlsm_Display.svg">
-    <img id="img05" src="svg_files/Revenue.xlsm_Display.svg">
-    <img id="img06" src="svg_files/ContinuousImprovement.xlsm_Company.svg">
-    <img id="img07" src="svg_files/SalesHoursByRep.xlsx_HoursPerPod.svg">
-    <img id="img08" src="svg_files/SalesHours_Company.xlsm_Display.svg">
-    <img id="img09" src="svg_files/AR_AGING_OVERDUE.xlsm_DisplayBucketed.svg">
-    <img id="img10" src="svg_files/LoadHoursRemaining_ALL_DEPARTMENTS.xlsm_Display.svg">
-    <img id="img11" src="svg_files/AP_Unreceived.xlsm_Display.svg">
-    <img id="img12" src="svg_files/AP_ReceivedNotInvoiced.xlsm_Display.svg">
-    <div id="lights"></div>
-    <div class="snowflakes" aria-hidden="true">
-      <div class="snowflake">
-        <div class="inner">❅</div>
-      </div>
-      <div class="snowflake">
-        <div class="inner">❅</div>
-      </div>
-      <div class="snowflake">
-        <div class="inner">❅</div>
-      </div>
-      <div class="snowflake">
-        <div class="inner">❅</div>
-      </div>
-      <div class="snowflake">
-        <div class="inner">❅</div>
-      </div>
-      <div class="snowflake">
-        <div class="inner">❅</div>
-      </div>
-      <div class="snowflake">
-        <div class="inner">❅</div>
-      </div>
-      <div class="snowflake">
-        <div class="inner">❅</div>
-      </div>
-      <div class="snowflake">
-        <div class="inner">❅</div>
-      </div>
-      <div class="snowflake">
-        <div class="inner">❅</div>
-      </div>
-      <div class="snowflake">
-        <div class="inner">❅</div>
-      </div>
-      <div class="snowflake">
-        <div class="inner">❅</div>
-      </div>
-    </div>
-    <script>
-      images = document.querySelectorAll('img')
-      canvases = document.querySelectorAll('canvas')
 
-      function setWidth(canvas) {
-        switch (window.screen.availWidth) {
-          case 3840:
-            canvas.width = 752;
-            console.log('Small size')
-            break;
-          case 4096:
-            canvas.width = 781;
-            console.log('Big size')
-            break;
-          default:
-            console.log('Unknown resolution');
-        }
-      }
-      
-      function setCanvasDimensions() {
-        canvases.forEach(canvas => {
-          const parent = canvas.parentElement;
-          if (parent && parent.classList.contains('grid')) {
-            setWidth(canvas);
-            canvas.height = 1106;
-          } else if (parent && parent.classList.contains('splitFrame')) {
-            setWidth(canvas);
-            canvas.height = 540;
-          }
-        });
-      }
+    <!-- The background div -->
+    <div id="theBackground"></div>
+    <div class="grid-stack"></div>
 
-      function drawImageToCanvas(image, canvas) {
-        const ctx = canvas.getContext("2d");
-        const scale = Math.min(canvas.width / image.width, canvas.height / image.height);
-        const w = image.width * scale;
-        const h = image.height * scale;
-        const x = (canvas.width - w) / 2; // center horizontally
-        const y = (canvas.height - h) / 2; // center vertically
-        ctx.drawImage(image, x, y, w, h);
-      }
+    <script type="text/javascript">
+    
+    const TV_SIZE = 'TV_WIDE_SMALL';
+    const defaultGridStackConfig = {
+        "safety_display_Company": {
+            "id": "safety_display_Company",
+            "imageUrl": "svg_files/safety_display_Company.svg",
+            "seqNumber": "12227",
+            "gridPosition": { "x": 0, "y": 1, "w": 6, "h": 7 }
+        },
+        "Quality_ALL_DEPARTMENTS.xlsm_Display.svg": {
+            "id": "Quality_ALL_DEPARTMENTS.xlsm_Display.svg",
+            "imageUrl": "svg_files/Quality_ALL_DEPARTMENTS.xlsm_Display.svg",
+            "seqNumber": "12227",
+            "gridPosition": { "x": 6, "y": 1, "w": 6, "h": 7 }
+        },
+        "DeliveryOnTime.xlsm_Display.svg": {
+            "id": "DeliveryOnTime.xlsm_Display.svg",
+            "imageUrl": "svg_files/DeliveryOnTime.xlsm_Display.svg",
+            "seqNumber": "12227",
+            "gridPosition": { "x": 6, "y": 15, "w": 6, "h": 4 }
+        },
+        "DirIndir_ALL_DEPARTMENTS.xlsm_Display.svg": {
+            "id": "DirIndir_ALL_DEPARTMENTS.xlsm_Display.svg",
+            "imageUrl": "svg_files/DirIndir_ALL_DEPARTMENTS.xlsm_Display.svg",
+            "seqNumber": "12227",
+            "gridPosition": { "x": 6, "y": 8, "w": 6, "h": 7 }
+        },
+        "Revenue.xlsm_Display": {
+            "id": "Revenue.xlsm_Display",
+            "imageUrl": "svg_files/Revenue.xlsm_Display.svg",
+            "seqNumber": 4,
+            "gridPosition": { "x": 0, "y": 8, "w": 6, "h": 13 }
+        },
+        "ContinuousImprovement.xlsm_Company": {
+            "id": "ContinuousImprovement.xlsm_Company",
+            "imageUrl": "svg_files/ContinuousImprovement.xlsm_Company.svg",
+            "seqNumber": 4,
+            "gridPosition": { "x": 0, "y": 8, "w": 6, "h": 13 }
+        },
+        "SalesHours_Company.xlsm_Display": {
+            "id": "SalesHours_Company.xlsm_Display",
+            "imageUrl": "svg_files/SalesHours_Company.xlsm_Display.svg",
+            "seqNumber": 4,
+            "gridPosition": { "x": 0, "y": 8, "w": 6, "h": 13 }
+        },
+        "SalesHoursByRep.xlsx_HoursPerPod": {
+            "id": "SalesHoursByRep.xlsx_HoursPerPod",
+            "imageUrl": "svg_files/SalesHoursByRep.xlsx_HoursPerPod.svg",
+            "seqNumber": 4,
+            "gridPosition": { "x": 0, "y": 8, "w": 6, "h": 13 }
+        },
+        "AR_AGING_OVERDUE.xlsm_DisplayBucketed": {
+            "id": "AR_AGING_OVERDUE.xlsm_DisplayBucketed",
+            "imageUrl": "svg_files/AR_AGING_OVERDUE.xlsm_DisplayBucketed.svg",
+            "seqNumber": 4,
+            "gridPosition": { "x": 0, "y": 8, "w": 6, "h": 13 }
+        },
+        "LoadHoursRemaining_ALL_DEPARTMENTS.xlsm_Display": {
+            "id": "LoadHoursRemaining_ALL_DEPARTMENTS.xlsm_Display",
+            "imageUrl": "svg_files/LoadHoursRemaining_ALL_DEPARTMENTS.xlsm_Display.svg",
+            "seqNumber": 4,
+            "gridPosition": { "x": 0, "y": 8, "w": 6, "h": 13 }
+        },
+        "AP_Unreceived.xlsm_Display": {
+            "id": "AP_Unreceived.xlsm_Display",
+            "imageUrl": "svg_files/AP_Unreceived.xlsm_Display.svg",
+            "seqNumber": 4,
+            "gridPosition": { "x": 0, "y": 8, "w": 6, "h": 13 }
+        },
+        "AP_ReceivedNotInvoiced.xlsm_Display": {
+            "id": "AP_ReceivedNotInvoiced.xlsm_Display",
+            "imageUrl": "svg_files/AP_ReceivedNotInvoiced.xlsm_Display.svg",
+            "seqNumber": 4,
+            "gridPosition": { "x": 0, "y": 8, "w": 6, "h": 13 }
+        },
+    };
+    const LOCAL_STORAGE_KEY = 'MainBoard_GembaBoard_GridStackConfig';
+    console.log('Initializing gridstack');
+    initializeGridStack();
 
-      function drawAllImagesToCanvases() {
-        for (let i = 1; i <= 12; i++) {
-          const img = document.getElementById(`img${String(i).padStart(2, '0')}`);
-          const canvas = document.getElementById(`spot${String(i).padStart(2, '0')}`);
-          if (img && canvas) {
-            drawImageToCanvas(img, canvas);
-          }
-        }
-      }
+    // For now, force a reload. Eventually though...
+    const n = 15; // minutes
+    setTimeout(() => {
+        window.location.href = window.location.pathname + "?t=" + new Date().getTime();
+    }, n * 1000 * 60);
 
-      
-      function draw_images() {
-        setCanvasDimensions();
-        
-        let loadedCount = 0;
-        const imagesList = Array.from({length: 12}, (_, i) => document.getElementById(`img${String(i+1).padStart(2, '0')}`));
-  
-        imagesList.forEach(img => {
-          if (img.complete) {
-            loadedCount++;
-            if (loadedCount === imagesList.length) drawAllImagesToCanvases();
-          } else {
-            img.addEventListener('load', () => {
-              loadedCount++;
-              if (loadedCount === imagesList.length) drawAllImagesToCanvases();
-            });
-          }
-        });
-      }
-
-      window.addEventListener("load", draw_images);
-      
-      let resizeTimer;
-      window.addEventListener("resize", () => {
-          clearTimeout(resizeTimer);
-          resizeTimer = setTimeout(draw_images, 1000);
-      });
     </script>
 </body>
 </html>
