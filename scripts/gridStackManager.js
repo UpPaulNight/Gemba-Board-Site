@@ -7,6 +7,10 @@
 const gridStackConfig = {};
 let grid;
 
+const SIZE_CONFIG = {
+    'TV_WIDE_SMALL': { width: 5, height: 270 },
+};
+
 // We should use local storage to keep a consistent config over reloads
 function loadGridStackConfigFromLocalStorage() {
     const storedConfig = localStorage.getItem(LOCAL_STORAGE_KEY);
@@ -190,6 +194,11 @@ function initializeGridStack() {
         items.push(renderGridStackItem(gridStackConfig[id]));
     }
     console.log('Loading gridstack items:', items);
+
+    if (TV_SIZE in SIZE_CONFIG) {
+        grid.column(SIZE_CONFIG[TV_SIZE].width);
+        grid.cellHeight(SIZE_CONFIG[TV_SIZE].height);
+    }
     grid.load(items);
 
 }
