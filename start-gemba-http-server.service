@@ -6,7 +6,7 @@ After=local-fs.target
 Type=simple
 User=pauls
 WorkingDirectory=/home/pauls/Gemba-Board-Site
-ExecStart=/usr/bin/python3 -m http.server 8000 --bind 127.0.0.1 --directory /home/pauls/Gemba-Board-Site
+ExecStart=/usr/bin/python3 /home/pauls/Gemba-Board-Site/nocache_server.py
 Restart=on-failure
 RestartSec=2s
 
