@@ -1,8 +1,11 @@
 [Unit]
 Description=Run python script to refresh image files
+After=network-online.target
+Wants=network-online.target
 
 [Service]
 User=pauls
 Type=oneshot
 WorkingDirectory=/home/pauls/Gemba-Board-Site
 ExecStart=/home/pauls/Gemba-Board-Site/.venv/bin/python3 index.py
+ExecStartPre=/usr/bin/ping -c 1 -W 5 kinetic.paulsmachine.com
