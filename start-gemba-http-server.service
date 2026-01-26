@@ -1,6 +1,7 @@
 [Unit]
 Description=Start Python server to serve gemba files
 After=local-fs.target
+After=network.target
 
 [Service]
 Type=simple
