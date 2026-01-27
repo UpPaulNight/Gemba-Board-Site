@@ -4,6 +4,7 @@ Description=Refresh images at 5:30 AM for folks who have early meetings
 [Timer]
 OnCalendar=Mon..Fri 05:29
 RandomizedDelaySec=3m
+Unit=refresh-image.service
 
 [Install]
 WantedBy=timers.target
