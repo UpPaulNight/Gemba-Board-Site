@@ -49,7 +49,7 @@ python3 index.py
 
 ## Configure the service files
 
-In `gemba-browser.service`, edit the line that currently is
+In `services/gemba-browser.service`, edit the line that currently is
 `ExecStart=/usr/bin/chromium --kiosk http://127.0.0.1:8000/index.html`. Instead
 of *index.html*, put the specific HTML file you want to open on startup, e.g.
 *Fabrication.html*.
@@ -66,8 +66,8 @@ systemctl --user daemon-reload
 ### Copy service and timer files
 
 ```bash
-cp *.service ~/.config/systemd/user/
-cp *.timer ~/.config/systemd/user/
+cp services/*.service ~/.config/systemd/user/
+cp services/*.timer ~/.config/systemd/user/
 systemctl --user daemon-reload
 ```
 
