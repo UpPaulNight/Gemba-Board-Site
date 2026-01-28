@@ -20,7 +20,7 @@ npm install
 
 ```bash
 mkdir -p  ~/.fonts/truetype
-cp fonts/* ~/.fonts/truetype/
+cp -r fonts/* ~/.fonts/truetype/
 fc-cache -f -v
 ```
 
