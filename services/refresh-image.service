@@ -4,7 +4,6 @@ After=network-online.target
 Wants=network-online.target
 
 [Service]
-User=pauls
 Type=oneshot
 WorkingDirectory=/home/pauls/Gemba-Board-Site
 ExecStart=/home/pauls/Gemba-Board-Site/.venv/bin/python3 index.py

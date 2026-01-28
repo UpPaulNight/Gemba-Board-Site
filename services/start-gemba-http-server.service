@@ -5,7 +5,6 @@ After=network.target
 
 [Service]
 Type=simple
-User=pauls
 WorkingDirectory=/home/pauls/Gemba-Board-Site
 ExecStart=/usr/bin/python3 /home/pauls/Gemba-Board-Site/nocache_server.py
 Restart=on-failure
